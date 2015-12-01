@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Liste des Collaborateurs</title>
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
+    <link href="inspi/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="inspi/assets/css/angular-growl.css" rel="stylesheet">
+    <link href="inspi/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="inspi/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="inspi/assets/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <link href="inspi/assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+
+    <link href="inspi/assets/css/animate.css" rel="stylesheet">
+    <link href="inspi/assets/css/style.css" rel="stylesheet">
+    
+
+</head>
+
+<body ng-modules="rh, rhProjets"   style="font-family:'Varela Round', sans-serif,'Helvetica Neue', Helvetica, Arial, sans-serif">
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="inspi/assets/img/profile_small.jpg" />
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Mohamed Ali</strong>
+                             </span> <span class="text-muted text-xs block">Directeur Technique <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        SQLI
+                    </div>
+                </li>
+                <li class="active" style="font-size:11px">
+                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion des collaborateurs</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="#/allCollabo">Liste des collaborateurs</a></li>
+                        <li class="active"><a href="#/addCollabo">Ajouter un collaborateur</a></li>
+                    </ul>
+                </li>
+                <li class="active" style="font-size:11px">
+                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion des bilans</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="#/allCollabo">Renseigner le feedback</a></li>
+                        <li class="active"><a href="#/addCollabo">Consulter les feedback</a></li>
+                        <li><a href="#">Renseigner les objectifs</a></li>
+                        <li><a href="#">Consulter les objectifs</a></li>
+                    </ul>
+                </li>
+                 <li class="active" style="font-size:11px">
+                    <a href="#/projets"><i class="fa fa-table"></i> <span class="nav-label">Gestion des Projets</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="#/../projets">Liste des projets</a></li>
+                        <li><a href="#/../addProjet">Ajouter un projet</a></li>
+                    </ul>
+                </li>
+                </ul>
+
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenue</span>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+                </ul>
+
+        </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Gestion des collaborateurs</h2>
+                    <form class="form-inline ">
+ </form>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Accueil</a>
+                        </li>
+                        <li>
+                            <a>Collaborateurs</a>
+                        </li>
+                        <li class="active">
+                            <strong>Liste des collaborateurs</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins" ng-view>
+            </div>
+                 
+ 
+        </div>
+    </div>
+    <script type="text/javascript" src="inspi/assets/angular/angular.min.js"></script>
+    <script type="text/javascript" src="inspi/assets/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="inspi/assets/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="inspi/assets/angular/angular-growl.js"></script>
+    <script type="text/javascript" src="inspi/assets/angular/dirPagination.js"></script>
+    <script type="text/javascript" src="inspi/assets/angular/ng-modules.js"></script>
+	<script type="text/javascript" src="inspi/assets/js/script1.js"></script>
+	<script type="text/javascript" src="inspi/assets/js/script2.js"></script>
+	
+	<!-- Bootstrap datepicker -->
+	<script type="text/javascript" src="inspi/assets/js/datepicker.min.js"></script>
+	
+	
+	<!-- Mainly scripts -->
+    <script src="inspi/assets/js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="inspi/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="inspi/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script type="text/javascript" src="inspi/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="inspi/assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+    <!-- Data Tables -->
+    <script src="inspi/assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="inspi/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="inspi/assets/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script src="inspi/assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="inspi/assets/js/inspinia.js"></script>
+    <!-- <script src="inspi/assets/js/plugins/pace/pace.min.js"></script> -->
+   
+  
+    </div>
+    </div>
+    </div>
+    
+</body>
+</html>
+                     

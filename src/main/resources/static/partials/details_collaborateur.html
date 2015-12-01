@@ -1,0 +1,15 @@
+<div  ng-init="voirDetailsCollaborateur()">
+<h2 > Details du collaborateur</h2>
+   <ul>
+      <li>Nom : {{collaborateur.nom}}</li>
+      <li>Prenom: {{collaborateur.prenom}}</li>
+      <li>Date de naissance collaborateur: {{collaborateur.dateNaissance}}</li>
+      <li>Date d'embauche: {{collaborateur.dateEmbauche}}</li>
+      <li>Poste Occupe: {{collaborateur.poste}}</li>
+      <li>Email: {{collaborateur.email}}</li>
+      <li>Manager Rh: {{collaborateur.managerRh.nom}}</li>
+      <li>feedbacks: {{collaborateur.feedbacks}}</li>
+      <li>objectifs: {{collaborateur.nom}}</li>
+      <li>Projets: <span ng-repeat="p in collaborateur.projets">{{p.intitule}}</span></li>
+   </ul>
+</div>
