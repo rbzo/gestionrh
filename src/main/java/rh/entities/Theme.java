@@ -13,7 +13,14 @@ public class Theme implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private String valeur;
+	
+
 	private String remarque;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_FEEDBACK")
+	private Feedback feedback;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_QUALIFICATION")
@@ -24,9 +31,10 @@ public class Theme implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Theme(Long id, String remarque) {
+	public Theme(Long id, String valeur, String remarque) {
 		super();
 		this.id = id;
+		this.valeur = valeur;
 		this.remarque = remarque;
 	}
 
@@ -36,6 +44,15 @@ public class Theme implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(String valeur) {
+		this.valeur = valeur;
 	}
 
 	public String getRemarque() {

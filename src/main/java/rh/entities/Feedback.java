@@ -3,6 +3,7 @@ package rh.entities;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,12 +34,7 @@ public class Feedback implements Serializable{
 	@JoinColumn(name="ID_BILAN")
 	private BilanPerformance bilanPerformance;
 	
-	@ManyToMany
-    @JoinTable(name = "THEMES_FEEDBACK", joinColumns =
-    @JoinColumn(name = "ID_FEEDBACK"), inverseJoinColumns = 
-    @JoinColumn(name = "ID_THEMES"))
-
-//	@JsonManagedReference
+	@OneToMany(mappedBy="feedback", cascade=CascadeType.ALL)
 	private Collection<Theme> themes;
 
 	public Feedback() {

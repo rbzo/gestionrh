@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Theme;
 import rh.metier.IthemeMetier;
-import rh.repository.ThemeRepository;
 
 @RestController
 @RequestMapping("/themes")
@@ -41,8 +41,8 @@ public class themeController {
 	
 	@RequestMapping(value="/{refTheme}", method=RequestMethod.POST)
 	@ResponseBody
-	public void addthemeTofeedback(@PathVariable Long refTheme, Long idqualification){
-		 themeMetier.addQualificationToTheme(refTheme, idqualification);
+	public boolean addqualificationTotheme(@PathVariable Long refTheme,  @RequestParam(value="qualification") Long idqualification){
+		 return themeMetier.addQualificationToTheme(refTheme, idqualification);
 	}
 	
 

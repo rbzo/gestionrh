@@ -10,26 +10,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Qualification;
+import rh.metier.IQualificationMetier;
 import rh.repository.QualificationRepository;
 
 @RestController
 @RequestMapping("/qualifications")
 public class qualificationController {
 	@Autowired
-	private QualificationRepository qualificationRepository;
+	private IQualificationMetier qualificationMetier;
 
 	
 	@RequestMapping( method=RequestMethod.POST)
 	@ResponseBody
 	public Qualification addQualification(@RequestBody Qualification q){
-		qualificationRepository.save(q);
+		qualificationMetier.addQualification(q);
 		return q;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public List<Qualification> getAllQualification(){
-		return qualificationRepository.findAll();
+		return qualificationMetier.getAllQualification();
 		
 	}
 

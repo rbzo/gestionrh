@@ -8,6 +8,6 @@ public interface IthemeMetier {
 	public Theme addTheme(Theme t  );
 	public List<Theme> getallThemes();
 	public Theme getTheme(Long idTheme);
-	public void addQualificationToTheme(Long codeQualification, Long codeTheme);
+	public boolean addQualificationToTheme(Long codeQualification, Long codeTheme);
 
 }

@@ -30,10 +30,12 @@ public class ThemeMetierImp implements IthemeMetier{
 
 
 	@Override
-	public void addQualificationToTheme(Long codeQualification, Long codeTheme) {
+	public boolean addQualificationToTheme(Long codeQualification, Long codeTheme) {
 		Qualification q = qualificationRepository.findOne(codeQualification);
 		Theme t= themeRepository.findOne(codeTheme);
 		t.setQualification(q);
+		themeRepository.saveAndFlush(t);
+		return true;
 		
 	}
 
