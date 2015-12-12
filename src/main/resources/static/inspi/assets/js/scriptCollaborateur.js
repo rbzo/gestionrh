@@ -23,6 +23,7 @@ app.config(['$routeProvider',
 					templateUrl: 'partials/details_collaborateur.html',
 					controller:'rhController'
 				})
+	             
 				.otherwise({
 					redirectTo:'/allCollabo'
 				});
@@ -40,6 +41,7 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	$scope.collaborateur={};
 	$scope.idCollaborateur=0;;
 	//$scope.motCle=null;
+	$scope.identifiants={};
 	$scope.url = 'http://localhost:1111/collaborateurs/';
 	$scope.pageCourante=0;
 	
@@ -82,8 +84,18 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 			growl.success('Collaborateur supprimé avec succes.',{title: ''});
 			$scope.lister();
 		});
-	}
+	};
 	
 	  
 	
-})
+});
+
+
+
+
+
+
+
+
+
+

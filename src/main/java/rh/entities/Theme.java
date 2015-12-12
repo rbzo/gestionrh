@@ -18,10 +18,10 @@ public class Theme implements Serializable{
 
 	private String remarque;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="ID_FEEDBACK")
 	private Feedback feedback;
-	
+	*/
 	@ManyToOne
 	@JoinColumn(name="ID_QUALIFICATION")
 	private Qualification qualification;

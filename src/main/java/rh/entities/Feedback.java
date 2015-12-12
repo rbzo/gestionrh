@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -34,9 +35,9 @@ public class Feedback implements Serializable{
 	@JoinColumn(name="ID_BILAN")
 	private BilanPerformance bilanPerformance;
 	
-	@OneToMany(mappedBy="feedback", cascade=CascadeType.ALL)
+	/*@OneToMany(mappedBy="feedback")
 	private Collection<Theme> themes;
-
+*/
 	public Feedback() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -72,6 +73,7 @@ public class Feedback implements Serializable{
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
+	@JsonIgnore
 
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
@@ -89,13 +91,13 @@ public class Feedback implements Serializable{
 		this.bilanPerformance = bilanPerformance;
 	}
 
-	public Collection<Theme> getThemes() {
+	/*public Collection<Theme> getThemes() {
 		return themes;
 	}
 
 	public void setThemes(Collection<Theme> themes) {
 		this.themes = themes;
-	}
+	}*/
 	
 	
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Feedback;
 import rh.entities.PageQualificationGlobale;
+import rh.entities.Theme;
 import rh.metier.IfeedbackMetier;
 import rh.repository.FeedbackRepository;
 
@@ -34,10 +35,11 @@ public class feedbackController {
 	public Feedback ajouterFeedback(@RequestParam(value="collaborateur") Long matriculeCollaborateur, @RequestBody Feedback f) {
 		return feedbackMetier.ajouterFeedback(matriculeCollaborateur, f);
 	}
-    @RequestMapping(value="/{codeFeedback}/themes/", method=RequestMethod.GET)
+    @RequestMapping(value="/themesf", method=RequestMethod.POST)
     @ResponseBody
-	public void addThemeToFeedback(@PathVariable Long codeFeedback, @RequestParam Long codeTheme) {
+	public void addThemeToFeedback( @RequestParam(value="codeFeedback") Long codeFeedback, @RequestParam(value="codeTheme") Long codeTheme) {
 		feedbackMetier.addThemeToFeedback(codeFeedback, codeTheme);
+	
 	}
     @RequestMapping("/{idfeedback}")
     @ResponseBody
@@ -54,6 +56,12 @@ public class feedbackController {
 	public PageQualificationGlobale gethemesqualifies(@RequestParam Long idFeedback, @RequestParam int page, @RequestParam int size) {
 		return feedbackMetier.gethemesqualifies(idFeedback, page, size);
 	}
+    
+    @RequestMapping(value="/{idFeedback}/themes", method=RequestMethod.GET)
+    @ResponseBody
+    public Iterable<Theme> getThemesByfb(@PathVariable Long idFeedback){
+    	return feedbackMetier.getThemesByfeedback(idFeedback);
+    }
     
 	
 	

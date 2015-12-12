@@ -26,7 +26,7 @@ app2.config(['$routeProvider',
 /**
  * Contrôleur de l'application app2
  */
-app.controller('projetController', function($scope, $http,$routeParams, growl, $location){
+app2.controller('projetController', function($scope, $http,$routeParams, growl, $location){
 	$scope.projets=[];
 	$scope.projet={};
 	$scope.pageCourante=0;

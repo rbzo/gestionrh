@@ -10,10 +10,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 import rh.repository.CollaborateurRepository;
 
 @SpringBootApplication
+//@EnableZuulProxy
 public class DemoApplication {
 
     public static void main(String[] args) {
