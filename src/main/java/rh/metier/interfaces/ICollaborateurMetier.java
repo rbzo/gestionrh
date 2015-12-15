@@ -1,4 +1,4 @@
-package rh.metier;
+package rh.metier.interfaces;
 
 import org.springframework.data.domain.Page;
 
@@ -10,5 +10,6 @@ public interface ICollaborateurMetier {
 	public Page<Collaborateur> getallcollaborateurs(int page);
 	public Collaborateur getCollaborateur(Long refCollaborateur);
 	public void deleteCollaborateur(Long refCollaborateur);
+	public boolean addProjetToCollaborateur(Long idProjet, Long IdCollaborateur);
 
 }

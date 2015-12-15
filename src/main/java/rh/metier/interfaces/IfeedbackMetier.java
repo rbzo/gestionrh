@@ -1,4 +1,4 @@
-package rh.metier;
+package rh.metier.interfaces;
 
 import java.util.List;
 import java.util.Set;

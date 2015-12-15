@@ -1,4 +1,4 @@
-package rh.metier;
+package rh.metier.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import rh.entities.Projet;
+import rh.metier.interfaces.IProjetMetier;
 import rh.repository.ProjetRepository;
 @Service
 public class projetMetierImpl implements IProjetMetier{
@@ -30,6 +31,12 @@ public class projetMetierImpl implements IProjetMetier{
 	@Override
 	public void deleteProjet(Long refProjet) {
 		 projetRepository.delete(refProjet);
+	}
+
+	@Override
+	public Projet findByIntitule(String nomprojet) {
+		// TODO Auto-generated method stub
+		return projetRepository.findProjetByintitule(nomprojet);
 	}
 
 }

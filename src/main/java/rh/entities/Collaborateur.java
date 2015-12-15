@@ -23,6 +23,7 @@ import org.hibernate.annotations.Cascade;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -59,9 +60,9 @@ public class Collaborateur implements Serializable{
   // @JsonManagedReference
    private Set<Projet> projets=new HashSet<Projet>();
    
-   @JsonBackReference
+  /* @JsonBackReference
    @ManyToMany(mappedBy="collaborateurs")
-   private Set<Evaluateur> evaluateurs;
+   private Set<Evaluateur> evaluateurs;*/
    
    
    
@@ -135,6 +136,7 @@ public Set<Feedback> getFeedbacks() {
 public void setFeedbacks(Set<Feedback> feedbacks) {
 	this.feedbacks = feedbacks;
 }
+//@JsonIgnore
 public Set<Objectif> getObjectifs() {
 	return objectifs;
 }
@@ -147,13 +149,13 @@ public Set<Projet> getProjets() {
 public void setProjets(Set<Projet> projets) {
 	this.projets = projets;
 }
-public Set<Evaluateur> getEvaluateurs() {
+/*public Set<Evaluateur> getEvaluateurs() {
 	return evaluateurs;
 }
 public void setEvaluateurs(Set<Evaluateur> evaluateurs) {
 	this.evaluateurs = evaluateurs;
 }
-
+*/
 
    
 }

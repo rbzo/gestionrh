@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Theme;
-import rh.metier.IthemeMetier;
+import rh.metier.interfaces.IthemeMetier;
 
 @RestController
 @RequestMapping("/themes")

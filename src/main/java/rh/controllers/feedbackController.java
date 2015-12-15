@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rh.entities.Feedback;
 import rh.entities.PageQualificationGlobale;
 import rh.entities.Theme;
-import rh.metier.IfeedbackMetier;
+import rh.metier.interfaces.IfeedbackMetier;
 import rh.repository.FeedbackRepository;
 
 @RestController

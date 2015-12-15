@@ -12,35 +12,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name="OBJECTIFS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Objectif implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private String categorie;
 	private String intitule;
+	
 	private String annee;
 	private int pourcentageAvancement;
-	private int poids;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_COLLABORATEUR")
 	private Collaborateur collaborateur;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "RESULTATS_OBJECTIFS",
-            joinColumns = @JoinColumn(name = "ID_OBJ"),
-            inverseJoinColumns = @JoinColumn(name = "ID_RESULTAT")
-    )
-	
-	//@JsonManagedReference
-	private Collection<Resultat> resultats;
 	@ManyToOne
 	@JoinColumn(name="ID_BILAN")
 	private BilanPerformance bilanPerformance;
@@ -50,15 +45,28 @@ public class Objectif implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Objectif(Long id, String intitule, String annee,
-			int pourcentageAvancement, int poids) {
+    
+
+	public Objectif(String categorie, String intitule, String annee) {
+		super();
+		this.categorie = categorie;
+		this.intitule = intitule;
+		this.annee = annee;
+	}
+
+
+
+	public Objectif(Long id, String categorie, String intitule, String annee,
+			int pourcentageAvancement) {
 		super();
 		this.id = id;
+		this.categorie = categorie;
 		this.intitule = intitule;
 		this.annee = annee;
 		this.pourcentageAvancement = pourcentageAvancement;
-		this.poids = poids;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -68,6 +76,16 @@ public class Objectif implements Serializable{
 		this.id = id;
 	}
 
+	
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
+	
+
 	public String getIntitule() {
 		return intitule;
 	}
@@ -75,6 +93,7 @@ public class Objectif implements Serializable{
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
 	}
+
 
 	public String getAnnee() {
 		return annee;
@@ -92,14 +111,7 @@ public class Objectif implements Serializable{
 		this.pourcentageAvancement = pourcentageAvancement;
 	}
 
-	public int getPoids() {
-		return poids;
-	}
-
-	public void setPoids(int poids) {
-		this.poids = poids;
-	}
-
+    @JsonIgnore
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
 	}
@@ -108,13 +120,6 @@ public class Objectif implements Serializable{
 		this.collaborateur = collaborateur;
 	}
 
-	public Collection<Resultat> getResultats() {
-		return resultats;
-	}
-
-	public void setResultats(Collection<Resultat> resultats) {
-		this.resultats = resultats;
-	}
 
 	public BilanPerformance getBilanPerformance() {
 		return bilanPerformance;

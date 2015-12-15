@@ -1,4 +1,4 @@
-package rh.metier;
+package rh.metier.implementations;
 
 
 
@@ -15,6 +15,7 @@ import rh.entities.Feedback;
 import rh.entities.FeedbackThemes;
 import rh.entities.PageQualificationGlobale;
 import rh.entities.Theme;
+import rh.metier.interfaces.IfeedbackMetier;
 import rh.repository.CollaborateurRepository;
 import rh.repository.FeedbackThemesRepository;
 import rh.repository.ThemeRepository;

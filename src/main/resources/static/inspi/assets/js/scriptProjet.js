@@ -31,6 +31,7 @@ app2.controller('projetController', function($scope, $http,$routeParams, growl, 
 	$scope.projet={};
 	$scope.pageCourante=0;
 	$scope.url = 'http://localhost:1111/projets/';
+	
 	$scope.listerProjets=function(){
 		$http.get("/projets?page="+$scope.pageCourante)
 		.success(function(data){

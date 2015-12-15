@@ -1,7 +1,7 @@
 /**
  * 
  */
-var app = angular.module('rh', ['ngRoute','angular-growl']);
+var app = angular.module('rh', ['ngRoute','angular-growl','ui.bootstrap']);
 
 /**
  * configuration du module principal
@@ -23,7 +23,6 @@ app.config(['$routeProvider',
 					templateUrl: 'partials/details_collaborateur.html',
 					controller:'rhController'
 				})
-	             
 				.otherwise({
 					redirectTo:'/allCollabo'
 				});
@@ -35,7 +34,8 @@ app.config(['$routeProvider',
 /**
  * Contrôleur de l'application app
  */
-app.controller('rhController', function($scope, $http, $routeParams, growl, $location){
+app.controller('rhController', function($scope, $http, $routeParams,growl, $location){
+	
     $scope.user={};
 	$scope.collaborateurs=[];
 	$scope.collaborateur={};
@@ -44,6 +44,7 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	$scope.identifiants={};
 	$scope.url = 'http://localhost:1111/collaborateurs/';
 	$scope.pageCourante=0;
+	$scope.objectif={};
 	
 	$scope.lister=function(){
 		$http.get("http://localhost:1111/collaborateurs?page="+$scope.pageCourante)
@@ -86,7 +87,27 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 		});
 	};
 	
-	  
+
+	
+	
+	//$scope.objectif.annee= new Date();
+	
+	$scope.addobjectif = function () {
+		var id1= $routeParams.ref;
+		var obj ={"categorie": $scope.objectif.categorie ,"intitule":$scope.objectif.nom ,"annee":$scope.objectif.annee , "pourcentageAvancement":$scope.objectif.pourcentage};
+		$http.post("http://localhost:1111/collaborateurs/"+id1+"/objectifs", obj)
+		.success(function(response){
+			$scope.collaborateur.objectifs.push(response);
+		        growl.success('Objectif ajouté avec succes.');
+		        console.log(obj)
+		        console.log(response)
+		        
+		        
+			console.log ("objectif ajouté");
+		});
+
+	    };
+	
 	
 });
 

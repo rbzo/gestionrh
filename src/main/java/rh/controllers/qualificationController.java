@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Qualification;
-import rh.metier.IQualificationMetier;
+import rh.metier.interfaces.IQualificationMetier;
 import rh.repository.QualificationRepository;
 
 @RestController

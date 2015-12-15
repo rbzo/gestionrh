@@ -1,4 +1,4 @@
-package rh.metier;
+package rh.metier.interfaces;
 
 import org.springframework.data.domain.Page;
 
@@ -9,5 +9,5 @@ public interface IProjetMetier {
 	public Projet getProjet(Long refProjet);
 	public Page<Projet> getAllprojets(int page);
 	public void deleteProjet(Long refProjet);
-
+    public Projet findByIntitule(String nomprojet);
 }

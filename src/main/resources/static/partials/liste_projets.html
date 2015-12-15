@@ -13,8 +13,8 @@
                     <tr class="gradeX" ng-repeat="p in projets.content">
                     	<td>{{p.id}}</td>
                     	<td>{{p.intitule}}</td>
-            			<td>{{p.dateDebut}}</td>
-            			<td>{{p.dateFin}}</td>
+            			<td>{{p.dateDebut|date:'dd-MM-yyyy'}}</td>
+            			<td>{{p.dateFin|date:'dd-MM-yyyy'}}</td>
             			<td>
             			<a href="#/projets/{{p.id}}"><i class="fa fa-files-o fa-lg "></i></a>
             			<span>&nbsp;</span><span>&nbsp;</span>

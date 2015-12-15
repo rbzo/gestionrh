@@ -12,19 +12,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Collaborateur;
-import rh.metier.ICollaborateurMetier;
+import rh.metier.interfaces.ICollaborateurMetier;
+import rh.metier.interfaces.IProjetMetier;
 import rh.repository.CollaborateurRepository;
 
 
 @RestController
 @RequestMapping("/collaborateurs")
 public class collaborateurController {
+	
+
 	@Autowired
 	private ICollaborateurMetier collaborateurMetier;
+	
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -56,6 +61,12 @@ public class collaborateurController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	@RequestMapping(value="/{IdCollaborateur}/projets", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean addProjetToCollaborateur(@RequestParam Long idProjet, @PathVariable Long IdCollaborateur) {
+		return collaborateurMetier.addProjetToCollaborateur(idProjet,
+				IdCollaborateur);
 	}
 }
 	

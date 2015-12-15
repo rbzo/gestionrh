@@ -1,4 +1,4 @@
-package rh.metier;
+package rh.metier.implementations;
 
 import java.util.List;
 import java.util.Set;
@@ -13,6 +13,7 @@ import rh.entities.Feedback;
 import rh.entities.FeedbackThemes;
 import rh.entities.Qualification;
 import rh.entities.Theme;
+import rh.metier.interfaces.IthemeMetier;
 import rh.repository.FeedbackRepository;
 import rh.repository.FeedbackThemesRepository;
 import rh.repository.QualificationRepository;

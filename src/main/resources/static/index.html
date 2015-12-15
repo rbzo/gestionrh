@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Liste des Collaborateurs</title>
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel='stylesheet' type='text/css'>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    
 
     <link href="inspi/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="inspi/assets/css/angular-growl.css" rel="stylesheet">
@@ -28,7 +30,7 @@
 
 </head>
 
-<body ng-modules="rh,rhfeedback, rhProjets"   style="font-family:'Varela Round', sans-serif,'Helvetica Neue', Helvetica, Arial, sans-serif">
+<body ng-modules="rh, rhfeedback, rhProjets, rhobjectifs"   style="font-family: 'Roboto', sans-serif,'Helvetica Neue', Helvetica, Arial, sans-serif">
 <div id="wrapper">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -66,6 +68,7 @@
                         <li><a href="#/addFeedback">Renseigner le feedback</a></li>
                         <li class="active"><a href="#/addCollabo">Consulter les feedback</a></li>
                         <li><a href="#">Renseigner les objectifs</a></li>
+                        <li><a href="#/addObjectif">Ajouter un objectif</a></li>
                         <li><a href="#">Consulter les objectifs</a></li>
                     </ul>
                 </li>
@@ -135,15 +138,19 @@
         </div>
     </div>
     <script src="inspi/assets/js/jquery-2.1.1.js"></script>
+     
     <script type="text/javascript" src="inspi/assets/angular/angular.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/angular-route.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/angular-growl.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/dirPagination.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/ng-modules.js"></script>
+    <script type="text/javascript" src="inspi/assets/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script type="text/javascript" src="inspi/assets/js/angular-modal-service.min.js""></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptCollaborateur.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptProjet.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptfeedback.js"></script>
+	<script type="text/javascript" src="inspi/assets/js/scriptObjectif.js"></script>
 	
 	
 	<!-- Mainly scripts -->
@@ -160,6 +167,7 @@
     <script src="inspi/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="inspi/assets/js/plugins/dataTables/dataTables.responsive.js"></script>
     <script src="inspi/assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+   
 
     <!-- Custom and plugin javascript -->
     <script src="inspi/assets/js/inspinia.js"></script>
