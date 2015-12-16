@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import rh.entities.Collaborateur;
 import rh.entities.Projet;
+import rh.entities.ProjetCollaborateur;
 import rh.metier.interfaces.ICollaborateurMetier;
 import rh.repository.CollaborateurRepository;
+import rh.repository.ProjetCollaborateurRepository;
 import rh.repository.ProjetRepository;
 @Service
 public class CollaborateurMetierImpl implements ICollaborateurMetier{
@@ -19,6 +21,8 @@ public class CollaborateurMetierImpl implements ICollaborateurMetier{
 	private CollaborateurRepository  collaborateurRepository;
 	@Autowired
 	private ProjetRepository projetRepository;
+	@Autowired
+	private ProjetCollaborateurRepository projetCollaborateurRepository;
 
 	@Override
 	public Collaborateur addCollaborateur(Collaborateur c) {
@@ -42,17 +46,18 @@ public class CollaborateurMetierImpl implements ICollaborateurMetier{
 	}
 
 	@Override
-	public boolean addProjetToCollaborateur(Long idProjet, Long IdCollaborateur) {
+	public boolean addProjetToCollaborateur(Long idProjet, Long IdCollaborateur, String rolejoue, int joursvalorises) {
 		Projet p = projetRepository.findOne(idProjet);
 		Collaborateur c =collaborateurRepository.findOne(IdCollaborateur);
-		Set<Projet> projets = c.getProjets();
-		Set<Collaborateur> collaborateurs = p.getCollaborateurs();
-		projets.add(p);
-		collaborateurs.add(c);
-		collaborateurRepository.save(c);
-		projetRepository.save(p);
+		projetCollaborateurRepository.save(new ProjetCollaborateur(rolejoue, joursvalorises, c, p));
 		return true;
 		
+	}
+
+	@Override
+	public Set<ProjetCollaborateur> getProjetsByCollaborateur(Long idCollaborateur) {
+		
+		return collaborateurRepository.getProjetsByCollaborateur(idCollaborateur);
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Projet;
+import rh.entities.ProjetCollaborateur;
 import rh.metier.interfaces.IProjetMetier;
 
 
@@ -51,7 +52,8 @@ public class projetController {
 		}
 	}
     @RequestMapping("/recherche")
-	public Projet findByIntitule(@RequestParam String nomprojet) {
-		return projetMetier.findByIntitule(nomprojet);
+	public ProjetCollaborateur findByIntitule(@RequestParam String nomprojet, @RequestParam(value="collaborateur") Long idCollaborateur) {
+		return projetMetier.findByIntitule(nomprojet, idCollaborateur);
 	}
+    
 }

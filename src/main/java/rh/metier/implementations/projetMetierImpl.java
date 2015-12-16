@@ -6,15 +6,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import rh.entities.Projet;
+import rh.entities.ProjetCollaborateur;
 import rh.metier.interfaces.IProjetMetier;
+import rh.repository.ProjetCollaborateurRepository;
 import rh.repository.ProjetRepository;
 @Service
 public class projetMetierImpl implements IProjetMetier{
 	@Autowired
    private ProjetRepository projetRepository;
+	@Autowired
+	private ProjetCollaborateurRepository projetCollaborateurRepository;
 	@Override
 	public Projet addProjet(Projet p) {
+		
 		projetRepository.save(p);
+		//projetCollaborateurRepository.save(new ProjetCollaborateur(null, 0, null, p));
 		 return p;
 	}
 
@@ -34,9 +40,9 @@ public class projetMetierImpl implements IProjetMetier{
 	}
 
 	@Override
-	public Projet findByIntitule(String nomprojet) {
+	public ProjetCollaborateur findByIntitule(String nomprojet, Long idCollaborateur) {
 		// TODO Auto-generated method stub
-		return projetRepository.findProjetByintitule(nomprojet);
+		return projetRepository.findProjetByintitule(nomprojet, idCollaborateur);
 	}
 
 }

@@ -32,13 +32,13 @@ public class feedbackController {
 	}
     @RequestMapping(method=RequestMethod.POST)
     @ResponseBody
-	public Feedback ajouterFeedback(@RequestParam(value="collaborateur") Long matriculeCollaborateur, @RequestBody Feedback f) {
-		return feedbackMetier.ajouterFeedback(matriculeCollaborateur, f);
+	public Feedback ajouterFeedback(@RequestParam(value="collaborateur") Long matriculeCollaborateur,@RequestParam(value="projet") Long idProjet, @RequestBody Feedback f) {
+		return feedbackMetier.ajouterFeedback(matriculeCollaborateur,idProjet, f);
 	}
     @RequestMapping(value="/themesf", method=RequestMethod.POST)
     @ResponseBody
-	public void addThemeToFeedback( @RequestParam(value="codeFeedback") Long codeFeedback, @RequestParam(value="codeTheme") Long codeTheme) {
-		feedbackMetier.addThemeToFeedback(codeFeedback, codeTheme);
+	public void addThemeToFeedback( @RequestParam(value="codeFeedback") Long codeFeedback, @RequestParam(value="codeTheme") Long codeTheme,@RequestParam(required=false) String remarque) {
+		feedbackMetier.addThemeToFeedback(codeFeedback, codeTheme,remarque);
 	
 	}
     @RequestMapping("/{idfeedback}")

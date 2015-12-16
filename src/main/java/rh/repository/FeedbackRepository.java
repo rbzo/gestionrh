@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import rh.entities.Feedback;
+import rh.entities.FeedbackThemes;
 import rh.entities.Theme;
 import rh.security.Role;
 
@@ -24,6 +25,16 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 	
 	@Query("select ft.theme from FeedbackThemes ft where ft.feedback.id=:x")
 	public Page<Theme> getThemesV2(@Param("x") long id, Pageable p);
+	
+	//liste de feedbacktheme par identifiant de feedback
+	@Query("select ft from FeedbackThemes ft where ft.feedback.id=:x")
+	public Set<FeedbackThemes> findByFeedback(@Param("x") Long idFeedBack);
+	
+	//feedbacktheme precis en fontion du feedback et du theme relatif
+	//liste de feedbacktheme par identifiant de feedback
+		@Query("select ft from FeedbackThemes ft where ft.feedback.id=:x and ft.theme.id=:y")
+		public FeedbackThemes findByFeedback(@Param("x") Long idFeedBack, @Param("y") Long idTheme);
+	
 
 
 }

@@ -50,7 +50,7 @@ public class Collaborateur implements Serializable{
    
    @OneToMany(mappedBy="collaborateur", cascade=CascadeType.ALL)
    private Set<Objectif> objectifs;
-   
+ /*  
    @ManyToMany(cascade=CascadeType.ALL)
    @JoinTable(
 		   name="COLLABORATEUR_PROJECTS",
@@ -58,7 +58,7 @@ public class Collaborateur implements Serializable{
 		   inverseJoinColumns=@JoinColumn(name="ID_PROJET")
 		   )
   // @JsonManagedReference
-   private Set<Projet> projets=new HashSet<Projet>();
+   private Set<Projet> projets=new HashSet<Projet>();*/
    
   /* @JsonBackReference
    @ManyToMany(mappedBy="collaborateurs")
@@ -143,12 +143,7 @@ public Set<Objectif> getObjectifs() {
 public void setObjectifs(Set<Objectif> objectifs) {
 	this.objectifs = objectifs;
 }
-public Set<Projet> getProjets() {
-	return projets;
-}
-public void setProjets(Set<Projet> projets) {
-	this.projets = projets;
-}
+
 /*public Set<Evaluateur> getEvaluateurs() {
 	return evaluateurs;
 }

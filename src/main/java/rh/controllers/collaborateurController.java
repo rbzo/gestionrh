@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rh.entities.Collaborateur;
+import rh.entities.Projet;
+import rh.entities.ProjetCollaborateur;
 import rh.metier.interfaces.ICollaborateurMetier;
 import rh.metier.interfaces.IProjetMetier;
 import rh.repository.CollaborateurRepository;
@@ -64,9 +66,13 @@ public class collaborateurController {
 	}
 	@RequestMapping(value="/{IdCollaborateur}/projets", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean addProjetToCollaborateur(@RequestParam Long idProjet, @PathVariable Long IdCollaborateur) {
-		return collaborateurMetier.addProjetToCollaborateur(idProjet,
-				IdCollaborateur);
+	public boolean addProjetToCollaborateur(@RequestParam Long idProjet, @PathVariable Long IdCollaborateur, @RequestParam String rolejoue, @RequestParam int joursvalorises) {
+		return collaborateurMetier.addProjetToCollaborateur(idProjet, IdCollaborateur, rolejoue, joursvalorises);
 	}
+    @RequestMapping(value="/{idCollaborateur}/projets", method =RequestMethod.GET)
+	public Set<ProjetCollaborateur> getProjetsByCollaborateur(@PathVariable Long idCollaborateur) {
+		return collaborateurMetier.getProjetsByCollaborateur(idCollaborateur);
+	}
+	
 }
 	

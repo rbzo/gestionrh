@@ -47,6 +47,7 @@ public class ThemeMetierImp implements IthemeMetier{
 		//on cherche le feedback
 		Feedback f =feedbackRepository.findOne(codeFeedback);
 		//on recupere la qualification à ajouter
+		FeedbackThemes ft  = feedbackRepository.findByFeedback(codeFeedback,codeTheme);
 		Qualification q = qualificationRepository.findOne(codeQualification);
 		//on recupere le theme dans la liste de themes
 		Theme ta = themeRepository.findOne(codeTheme);
@@ -54,9 +55,9 @@ public class ThemeMetierImp implements IthemeMetier{
 		Set<Theme> ths= feedbackRepository.getThemes(codeFeedback);
 		for (Theme t : ths) {
 			if(t.getValeur().equals(ta.getValeur())){
-				t.setQualification(q);
+				ft.setQualification(q);
 				//on enregistre le feedback mis à jour
-				feedbackThemesRepository.save(new FeedbackThemes(f, t));
+				feedbackThemesRepository.save(ft);
 				
 			}
 			

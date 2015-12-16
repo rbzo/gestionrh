@@ -25,11 +25,14 @@ public class Feedback implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private int nbreJoursValorises;
 	private String commentaire;
 	@ManyToOne
 	@JoinColumn(name="ID_COLLABORATEUR")
 	private Collaborateur collaborateur;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_PROJET")
+	private ProjetCollaborateur projetCollaborateur;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_BILAN")
@@ -43,10 +46,9 @@ public class Feedback implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Feedback(Long id, int nbreJoursValorises, String commentaire) {
+	public Feedback(Long id, String commentaire) {
 		super();
 		this.id = id;
-		this.nbreJoursValorises = nbreJoursValorises;
 		this.commentaire = commentaire;
 	}
 
@@ -58,13 +60,6 @@ public class Feedback implements Serializable{
 		this.id = id;
 	}
 
-	public int getNbreJoursValorises() {
-		return nbreJoursValorises;
-	}
-
-	public void setNbreJoursValorises(int nbreJoursValorises) {
-		this.nbreJoursValorises = nbreJoursValorises;
-	}
 
 	public String getCommentaire() {
 		return commentaire;
@@ -81,6 +76,16 @@ public class Feedback implements Serializable{
 
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
+	}
+	
+	
+
+	public ProjetCollaborateur getProjetCollaborateur() {
+		return projetCollaborateur;
+	}
+
+	public void setProjetCollaborateur(ProjetCollaborateur projetCollaborateur) {
+		this.projetCollaborateur = projetCollaborateur;
 	}
 
 	public BilanPerformance getBilanPerformance() {

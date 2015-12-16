@@ -50,7 +50,7 @@
      <i class="fa fa-desktop "></i> Projets
     </tab-heading>
     <hr/>
-     <div class="row">
+     <div class="row" ng-init="getProjetsCollaborateur()">
         <div class="col-lg-8">
             <div class="spacer panel panel-primary">
                 <div class="panel-heading">
@@ -64,13 +64,17 @@
                      <th>Intitule</th>
                      <th>Date de debut </th>
                       <th>Date de fin</th>
+                      <th>Role</th>
+                      <th>jours valorises</th>
                    </tr>
                    </thead>
                     <tbody >
-                      <tr ng-repeat="p in collaborateur.projets">
-                          <td>{{p.intitule}}</td>
-                          <td> {{p.dateDebut}}</td>
-                          <td>{{p.dateFin}}</td>
+                      <tr ng-repeat="p in projetsCollavorateur">
+                          <td>{{p.projet.intitule}}</td>
+                          <td> {{p.projet.dateDebut}}</td>
+                          <td>{{p.projet.dateFin}}</td>
+                          <td>{{p.rolecollaborateur}}</td>
+                          <td>{{p.joursvalorises}}</td>
                       </tr>
                       </tr>
                     </tbody>

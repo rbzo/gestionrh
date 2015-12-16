@@ -45,6 +45,7 @@ app.controller('rhController', function($scope, $http, $routeParams,growl, $loca
 	$scope.url = 'http://localhost:1111/collaborateurs/';
 	$scope.pageCourante=0;
 	$scope.objectif={};
+	$scope.projetsCollavorateur=[];
 	
 	$scope.lister=function(){
 		$http.get("http://localhost:1111/collaborateurs?page="+$scope.pageCourante)
@@ -77,6 +78,13 @@ app.controller('rhController', function($scope, $http, $routeParams,growl, $loca
 			$scope.collaborateur=data;
 			
 		});
+	};
+	$scope.getProjetsCollaborateur=function(){
+		var id = $routeParams.ref
+		$http.get("http://localhost:1111/collaborateurs/"+id+"/projets")
+		.success(function(data){
+			$scope.projetsCollavorateur = data;
+		})
 	};
 	
 	$scope.supprimerCollaborateur= function(refDel){

@@ -16,26 +16,23 @@ public class Theme implements Serializable{
 	private String valeur;
 	
 
-	private String remarque;
+	
 	
 	/*@ManyToOne
 	@JoinColumn(name="ID_FEEDBACK")
 	private Feedback feedback;
 	*/
-	@ManyToOne
-	@JoinColumn(name="ID_QUALIFICATION")
-	private Qualification qualification;
+	
 
 	public Theme() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Theme(Long id, String valeur, String remarque) {
+	public Theme(Long id, String valeur) {
 		super();
 		this.id = id;
 		this.valeur = valeur;
-		this.remarque = remarque;
 	}
 
 	public Long getId() {
@@ -55,21 +52,8 @@ public class Theme implements Serializable{
 		this.valeur = valeur;
 	}
 
-	public String getRemarque() {
-		return remarque;
-	}
+	
 
-	public void setRemarque(String remarque) {
-		this.remarque = remarque;
-	}
-
-	public Qualification getQualification() {
-		return qualification;
-	}
-
-	public void setQualification(Qualification qualification) {
-		this.qualification = qualification;
-	}
 	
 	
 

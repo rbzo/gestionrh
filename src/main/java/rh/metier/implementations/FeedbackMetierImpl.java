@@ -14,10 +14,13 @@ import rh.entities.Collaborateur;
 import rh.entities.Feedback;
 import rh.entities.FeedbackThemes;
 import rh.entities.PageQualificationGlobale;
+import rh.entities.ProjetCollaborateur;
 import rh.entities.Theme;
+import rh.metier.interfaces.IProjetMetier;
 import rh.metier.interfaces.IfeedbackMetier;
 import rh.repository.CollaborateurRepository;
 import rh.repository.FeedbackThemesRepository;
+import rh.repository.ProjetCollaborateurRepository;
 import rh.repository.ThemeRepository;
 import rh.repository.FeedbackRepository;
 @Service
@@ -30,6 +33,8 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 	private FeedbackRepository feedbackRepository;
 	@Autowired
 	private FeedbackThemesRepository feedbackThemesRepository;
+	@Autowired
+	private ProjetCollaborateurRepository projetCollaborateurRepository;
 	public int poidsglobal = 0;
 	public int nbreThemesQualifies;
 	
@@ -37,12 +42,14 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 	
 	@Override
 	//faire ca comme une mise à jour
-	public void addThemeToFeedback(Long codeFeedback, Long codeTheme) {
+	public void addThemeToFeedback(Long codeFeedback, Long codeTheme, String remarque) {
 		//on cherche le theme correspondant a lid
 		Theme th=themeRepository.findOne(codeTheme);
 		//le feedback existe til deja?
 		Feedback f = feedbackRepository.findOne(codeFeedback);
-		FeedbackThemes ft = feedbackThemesRepository.findByFeedback(codeFeedback);
+		System.out.println(f);
+		Set<FeedbackThemes> ft = feedbackRepository.findByFeedback(codeFeedback);
+		System.out.println(ft);
 		// s'il n'existe pas on genere lexception
 		if(f==null){
 			throw new RuntimeException("feedback inexistant");
@@ -58,19 +65,23 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 					 }
 			  // si pas trouvé, on crée la relation avec le theme
 				 if (!trouvé) {
-				 ft.setFeedback(f);
-				 ft.setTheme(th);
+					 ft.add(new FeedbackThemes(f, th, null,remarque));
+				 /*ft.setFeedback(f);
+				 ft.setTheme(th);*/
 				 feedbackThemesRepository.save(ft);
 				 }
 			 }
 		}
 		
 	}
-	public Feedback ajouterFeedback(Long matriculeCollaborateur, Feedback f) {
+	public Feedback ajouterFeedback(Long matriculeCollaborateur, Long idProjet, Feedback f) {
 		     Collaborateur c = collaborateurRepository.findOne(matriculeCollaborateur);
+		     ProjetCollaborateur pc = projetCollaborateurRepository.findOne(idProjet);
 		     f.setCollaborateur(c);
+		     f.setProjetCollaborateur(pc);
 		     c.getFeedbacks().add(f);
 		     feedbackRepository.save(f);
+		     feedbackThemesRepository.save(new FeedbackThemes(f, null));
 		     collaborateurRepository.saveAndFlush(c);
 		     return f;
 	}
@@ -89,21 +100,25 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 		Page<Theme> themesByFeedback = feedbackRepository.getThemesV2(idFeedback, new PageRequest(p,s));
 		//on cree une page de qualification globale
 		PageQualificationGlobale pqp= new PageQualificationGlobale();
+		
+		//
+		Set<FeedbackThemes> ft =feedbackRepository.findByFeedback(idFeedback);
 		//on lui assigne les themes
 		pqp.setThemes(themesByFeedback.getContent());
 		//on recupere le nombre total de themes qualifies
-		for (Theme t1 : pqp.getThemes()) {
-			if (!t1.getQualification().getValeur().equals("NA")) {
+		for ( FeedbackThemes ftcourant : ft) {
+			if (!ftcourant.getQualification().getValeur().equals("NA")) {
 				nbreThemesQualifies++;
 			}
+		
 		}
 		
 		
 		pqp.setNbreThemesQualifies(nbreThemesQualifies);
 		System.out.println(pqp.getNbreThemesQualifies());
-		for (Theme theme : pqp.getThemes()) {
+		for (FeedbackThemes ftcourant : ft) {
 			
-			int poidsCourant  =theme.getQualification().getPoids();
+			int poidsCourant  =ftcourant.getQualification().getPoids();
 			poidsglobal=poidsglobal+poidsCourant;
 		}
 		pqp.setTotalPoids(poidsglobal);

@@ -24,10 +24,10 @@ public class Projet implements Serializable {
 	private Date dateFin;
 	
 	
-	@ManyToMany(mappedBy="projets")
+	/*@ManyToMany(mappedBy="projets")
 	//@JsonBackReference
 	private Set<Collaborateur> collaborateurs;
-
+*/
 	public Projet() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -73,23 +73,8 @@ public class Projet implements Serializable {
 		this.dateFin = dateFin;
 	}
 
-	public Set<Collaborateur> getCollaborateurs() {
-		return collaborateurs;
-	}
 
-	public void setCollaborateurs(Set<Collaborateur> collaborateurs) {
-		this.collaborateurs = collaborateurs;
-	}
-
-	public Projet(Long id, String intitule, Date dateDebut, Date dateFin,
-			Set<Collaborateur> collaborateurs) {
-		super();
-		this.id = id;
-		this.intitule = intitule;
-		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
-		this.collaborateurs = collaborateurs;
-	}
+	
 	
 	
 	
