@@ -6,8 +6,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import rh.entities.BilanPerformance;
 import rh.entities.Collaborateur;
 import rh.entities.Projet;
 import rh.entities.ProjetCollaborateur;
@@ -46,11 +48,13 @@ public class CollaborateurMetierImpl implements ICollaborateurMetier{
 	}
 
 	@Override
-	public boolean addProjetToCollaborateur(Long idProjet, Long IdCollaborateur, String rolejoue, int joursvalorises) {
+	public ProjetCollaborateur addProjetToCollaborateur(Long idProjet, Long IdCollaborateur, String rolejoue, int joursvalorises) {
 		Projet p = projetRepository.findOne(idProjet);
 		Collaborateur c =collaborateurRepository.findOne(IdCollaborateur);
-		projetCollaborateurRepository.save(new ProjetCollaborateur(rolejoue, joursvalorises, c, p));
-		return true;
+		ProjetCollaborateur pc = new ProjetCollaborateur(rolejoue, joursvalorises, c, p);
+		projetCollaborateurRepository.save(pc);
+		return pc;
+		 
 		
 	}
 
@@ -59,5 +63,20 @@ public class CollaborateurMetierImpl implements ICollaborateurMetier{
 		
 		return collaborateurRepository.getProjetsByCollaborateur(idCollaborateur);
 	}
+
+	@Override
+	public Set<BilanPerformance> getBilansByCollaborateur(Long idCollaborateur) {
+		return collaborateurRepository.getAllBilansByCollbaorateur(idCollaborateur);
+	}
+
+	@Override
+	public Page<BilanPerformance> getLastBilanBycollaborateur(
+			Long matriculeCollaborateur) {
+		return collaborateurRepository.getLastbilanBycollaborateur(matriculeCollaborateur, new PageRequest(0, 1, Sort.Direction.DESC, "dateFin"));
+	}
+
+
+
+	
 
 }

@@ -14,6 +14,7 @@
     <link href="inspi/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="inspi/assets/css/angular-growl.css" rel="stylesheet">
     <link href="inspi/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="inspi/assets/js/jquery.steps.css" rel="stylesheet">
 
     <!-- Data Tables -->
     <link href="inspi/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
@@ -33,7 +34,7 @@
 
 </head>
 
-<body ng-modules="rh, rhfeedback, rhProjets, rhobjectifs"   style="font-family: 'Roboto', sans-serif,'Helvetica Neue', Helvetica, Arial, sans-serif">
+<body ng-modules="rh, rhfeedback, rhProjets, rhobjectifs,rhbilan"   style="font-family: 'Roboto', sans-serif,'Helvetica Neue', Helvetica, Arial, sans-serif">
 <div id="wrapper">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -61,25 +62,26 @@
                 <li class="active" style="font-size:11px">
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion des collaborateurs</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="#/allCollabo">Liste des collaborateurs</a></li>
-                        <li class="active"><a href="#/addCollabo">Ajouter un collaborateur</a></li>
+                        <li><a href="#/allCollabo"><i class="fa fa-circle-o"></i>Liste des collaborateurs</a></li>
+                        <li class="active"><a href="#/addCollabo"><i class="fa fa-circle-o"></i>Ajouter un collaborateur</a></li>
                     </ul>
                 </li>
                 <li class="active" style="font-size:11px">
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion des bilans</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="#/addFeedback">Renseigner le feedback</a></li>
-                        <li class="active"><a href="#/addCollabo">Consulter les feedback</a></li>
-                        <li><a href="#">Renseigner les objectifs</a></li>
-                        <li><a href="#/addObjectif">Ajouter un objectif</a></li>
-                        <li><a href="#">Consulter les objectifs</a></li>
+                        <li><a href="#/addFeedback"><i class="fa fa-circle-o"></i>Renseigner le feedback</a></li>
+                        <li class="active"><a href="#/addCollabo"><i class="fa fa-circle-o"></i>Consulter les feedback</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i>Renseigner les objectifs</a></li>
+                        <li><a href="#/addObjectif"><i class="fa fa-circle-o"></i>Ajouter un objectif</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i>Consulter les objectifs</a></li>
+                        <li><a href="#/addbilan"><i class="fa fa-circle-o"></i>Ajouter un bilan</a></li>
                     </ul>
                 </li>
                  <li class="active" style="font-size:11px">
                     <a href="#/projets"><i class="fa fa-table"></i> <span class="nav-label">Gestion des Projets</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="#/../projets">Liste des projets</a></li>
-                        <li><a href="#/../addProjet">Ajouter un projet</a></li>
+                        <li><a href="#/../projets"><i class="fa fa-circle-o"></i>Liste des projets</a></li>
+                        <li><a href="#/../addProjet"><i class="fa fa-circle-o"></i>Ajouter un projet</a></li>
                     </ul>
                 </li>
                 </ul>
@@ -141,6 +143,7 @@
         </div>
     </div>
     <script src="inspi/assets/js/jquery-2.1.1.js"></script>
+    <script src="inspi/assets/js/plugins/staps/jquery.steps.min.js"></script>
      
     <script type="text/javascript" src="inspi/assets/angular/angular.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/angular-resource.min.js"></script>
@@ -149,11 +152,12 @@
     <script type="text/javascript" src="inspi/assets/angular/dirPagination.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/ng-modules.js"></script>
     <script type="text/javascript" src="inspi/assets/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
-    <script type="text/javascript" src="inspi/assets/js/angular-modal-service.min.js""></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptCollaborateur.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptProjet.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptfeedback.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptObjectif.js"></script>
+	<script type="text/javascript" src="inspi/assets/js/script_bilan.js"></script>
+	
 	
 	
 	<!-- Mainly scripts -->

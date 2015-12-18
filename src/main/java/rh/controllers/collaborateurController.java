@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import rh.entities.BilanPerformance;
 import rh.entities.Collaborateur;
 import rh.entities.Projet;
 import rh.entities.ProjetCollaborateur;
@@ -66,13 +67,19 @@ public class collaborateurController {
 	}
 	@RequestMapping(value="/{IdCollaborateur}/projets", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean addProjetToCollaborateur(@RequestParam Long idProjet, @PathVariable Long IdCollaborateur, @RequestParam String rolejoue, @RequestParam int joursvalorises) {
+	public ProjetCollaborateur addProjetToCollaborateur(@RequestParam(value="projet") Long idProjet, @PathVariable Long IdCollaborateur, @RequestParam(value="role") String rolejoue, @RequestParam(value="jours") int joursvalorises) {
 		return collaborateurMetier.addProjetToCollaborateur(idProjet, IdCollaborateur, rolejoue, joursvalorises);
 	}
     @RequestMapping(value="/{idCollaborateur}/projets", method =RequestMethod.GET)
 	public Set<ProjetCollaborateur> getProjetsByCollaborateur(@PathVariable Long idCollaborateur) {
 		return collaborateurMetier.getProjetsByCollaborateur(idCollaborateur);
 	}
+    @RequestMapping(value="{idCollaborateur}/bilans", method = RequestMethod.GET)
+	public Set<BilanPerformance> getBilansByCollaborateur(@PathVariable Long idCollaborateur) {
+		return collaborateurMetier.getBilansByCollaborateur(idCollaborateur);
+	}
+    
+    
 	
 }
 	

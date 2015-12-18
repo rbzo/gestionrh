@@ -18,13 +18,13 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 	@Query("select f from Feedback f where f.collaborateur.id=:x")
 	public List<Feedback> findFeedbacksByCollaborateur(@Param("x") Long idCollaborateur);
 	
-	//liste des themes d'un feedback
+	//liste des themes d'un feedback identifie par son id
 	
 	@Query("select ft.theme from FeedbackThemes ft where ft.feedback.id=:x")
 	Set<Theme> getThemes(@Param("x") long idFeedback);
 	
-	@Query("select ft.theme from FeedbackThemes ft where ft.feedback.id=:x")
-	public Page<Theme> getThemesV2(@Param("x") long id, Pageable p);
+	@Query("select ft from FeedbackThemes ft where ft.feedback.id=:x")
+	public Page<FeedbackThemes> getThemesV2(@Param("x") long id, Pageable p);
 	
 	//liste de feedbacktheme par identifiant de feedback
 	@Query("select ft from FeedbackThemes ft where ft.feedback.id=:x")

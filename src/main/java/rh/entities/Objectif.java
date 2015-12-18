@@ -28,17 +28,15 @@ public class Objectif implements Serializable{
 	private Long id;
 	private String categorie;
 	private String intitule;
+	private String description;
 	
 	private String annee;
-	private int pourcentageAvancement;
+
 	
 	@ManyToOne
 	@JoinColumn(name="ID_COLLABORATEUR")
 	private Collaborateur collaborateur;
 	
-	@ManyToOne
-	@JoinColumn(name="ID_BILAN")
-	private BilanPerformance bilanPerformance;
 	
 	public Objectif() {
 		super();
@@ -47,10 +45,11 @@ public class Objectif implements Serializable{
 
     
 
-	public Objectif(String categorie, String intitule, String annee) {
+	public Objectif(String categorie, String intitule,String description, String annee) {
 		super();
 		this.categorie = categorie;
 		this.intitule = intitule;
+		this.description=description;
 		this.annee = annee;
 	}
 
@@ -63,7 +62,6 @@ public class Objectif implements Serializable{
 		this.categorie = categorie;
 		this.intitule = intitule;
 		this.annee = annee;
-		this.pourcentageAvancement = pourcentageAvancement;
 	}
 
 
@@ -103,13 +101,7 @@ public class Objectif implements Serializable{
 		this.annee = annee;
 	}
 
-	public int getPourcentageAvancement() {
-		return pourcentageAvancement;
-	}
-
-	public void setPourcentageAvancement(int pourcentageAvancement) {
-		this.pourcentageAvancement = pourcentageAvancement;
-	}
+	
 
     @JsonIgnore
 	public Collaborateur getCollaborateur() {
@@ -121,12 +113,17 @@ public class Objectif implements Serializable{
 	}
 
 
-	public BilanPerformance getBilanPerformance() {
-		return bilanPerformance;
+	
+
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setBilanPerformance(BilanPerformance bilanPerformance) {
-		this.bilanPerformance = bilanPerformance;
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

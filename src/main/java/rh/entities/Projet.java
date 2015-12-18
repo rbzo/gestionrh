@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
@@ -56,7 +57,7 @@ public class Projet implements Serializable {
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
 	}
-
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	public Date getDateDebut() {
 		return dateDebut;
 	}
@@ -64,7 +65,7 @@ public class Projet implements Serializable {
 	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	public Date getDateFin() {
 		return dateFin;
 	}

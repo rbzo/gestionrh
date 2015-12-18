@@ -50,6 +50,12 @@ public class Collaborateur implements Serializable{
    
    @OneToMany(mappedBy="collaborateur", cascade=CascadeType.ALL)
    private Set<Objectif> objectifs;
+
+   
+   @OneToMany(mappedBy="collaborateur", cascade=CascadeType.ALL)
+   private Set<BilanPerformance> bilanPerformances;
+   
+   
  /*  
    @ManyToMany(cascade=CascadeType.ALL)
    @JoinTable(
@@ -143,6 +149,12 @@ public Set<Objectif> getObjectifs() {
 public void setObjectifs(Set<Objectif> objectifs) {
 	this.objectifs = objectifs;
 }
+public Set<BilanPerformance> getBilanPerformances() {
+	return bilanPerformances;
+}
+public void setBilanPerformances(Set<BilanPerformance> bilanPerformances) {
+	this.bilanPerformances = bilanPerformances;
+}
 
 /*public Set<Evaluateur> getEvaluateurs() {
 	return evaluateurs;
@@ -151,6 +163,7 @@ public void setEvaluateurs(Set<Evaluateur> evaluateurs) {
 	this.evaluateurs = evaluateurs;
 }
 */
+
 
    
 }
