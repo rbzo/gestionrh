@@ -41,7 +41,13 @@ public class ThemeMetierImp implements IthemeMetier{
 		return themeRepository.findAll();
 	}
 
-
+    /**
+     * qualifier un theme
+     * 
+     * @param codeFeedback
+     * @param codeTheme
+     * @param codeQualification
+     */
 	@Override
 	public boolean addQualificationToTheme(Long codeFeedback,Long codeTheme,Long codeQualification) {
 		//on cherche le feedback
@@ -56,8 +62,8 @@ public class ThemeMetierImp implements IthemeMetier{
 		for (Theme t : ths) {
 			if(t.getValeur().equals(ta.getValeur())){
 				ft.setQualification(q);
-				//on enregistre le feedback mis à jour
-				feedbackThemesRepository.save(ft);
+				
+				feedbackThemesRepository.save(ft);//on enregistre le feedback mis à jour
 				
 			}
 			
@@ -81,11 +87,5 @@ public class ThemeMetierImp implements IthemeMetier{
 	}
 
 
-	/*@Override
-	public List<Theme> getthemeparfbcol(Long matcol) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	*/
 
 }

@@ -1,299 +1,285 @@
 <div class="ibox-content" ng-init="voirDetailsCollaborateur()">
-	<h2 > Details du collaborateur</h2>
-	<uib-tabset>
-		<uib-tab>
-			<tab-heading>
-				<i class="fa fa-user"></i> Profil
-			</tab-heading>
-			<hr>
-			<div class="row">
-				<div class="col-lg-10">
-					<div class="spacer panel panel-primary">
-						<div class="panel-heading">
-							<i class="fa fa-info-circle"></i> Informations sur le collaborateur
-						</div>
-						<table class="table table-striped table-bordered table-hover table-condensed dataTables-example " >
-							<tbody>
-								<tr>
-									<td>Nom :</td>
-									<td> {{collaborateur.nom}}</td>
-								</tr>
-								<tr>
-									<td>Prenom :</td>
-									<td> {{collaborateur.prenom}}</td>
-								</tr>
-								<tr>
-									<td>Date de naissance:</td>
-									<td>{{collaborateur.dateNaissance|date:'dd-MM-yyyy'}}</td>
-								</tr>
-								<tr>
-									<td>Date d'embauche:</td>
-									<td> {{collaborateur.dateEmbauche|date:'dd-MM-yyyy'}}</td>
-								</tr>
-								<tr>
-									<td>Poste Occupe:</td>
-									<td>{{collaborateur.poste}}</td>
-								</tr>
-								<tr>
-									<td>Email:</td>
-									<td>{{collaborateur.email}}</td>
-								</tr>
-								<tr>
-									<td>Manager RH:</td>
-									<td>{{collaborateur.managerRh.nom}}></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</uib-tab>
-		<uib-tab>
-			<tab-heading>
-				<i class="fa fa-desktop "></i> Projets
-			</tab-heading>
-			<hr/>
-			<div class="row" ng-init="getProjetsCollaborateur()">
-				<div class="col-lg-6">
-					<div class="spacer panel panel-primary">
-						<div class="panel-heading">
-							<i class="fa fa-info-circle"></i> PROJETS DU COLLABORATEUR
-						</div>
-						<table class="table table-striped table-bordered table-hover table-condensed dataTables-example" >
-							<thead>
-								<tr>
-									<th>Intitule</th>
-									<th>Date de debut </th>
-									<th>Date de fin</th>
-									<th>Role</th>
-									<th>jours valorises</th>
-								</tr>
-							</thead>
-							<tbody >
-								<tr ng-repeat="p in projetsCollavorateur">
-									<td>{{p.projet.intitule}}</td>
-									<td> {{p.projet.dateDebut}}</td>
-									<td>{{p.projet.dateFin}}</td>
-									<td>{{p.rolecollaborateur}}</td>
-									<td>{{p.joursvalorises}}</td>
-								</tr>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="col-lg-5 col-md-offset-1">
-					<div class="spacer panel panel-primary">
-						<div class="panel-heading">
-							<i class="fa fa-info-circle"></i> Attribuer un nouveau Projet
-						</div>
-						<div class="panel-body">
-							<div style="text-align:center;">
-								<i class="fa fa-laptop fa-4x"> </i>
-								<h2>Nouveau Projet</h2>
-							</div>
-							<div class="form-group">
-								<label>Numero du projet</label> <input type="text"  class="form-control" ng-model="projet.id" ng-blur="chercherprojet()">
-							</div>
-							<div class="form-group">
-								<label>Intitule</label> <input type="text"  class="form-control" ng-model="projet.intitule">
-							</div>
-							<div class="form-group">
-								<label>Date de debut</label> <input type="text"  class="form-control" ng-model="projet.dateDebut">
-							</div>
-							<div class="form-group">
-								<label>Date de fin</label> <input type="text" class="form-control" ng-model="projet.dateFin">
-							</div>
-							<div class="form-group">
-								<label>Role</label> <input type="text"  class="form-control" ng-model="projetcollaborateur.role">
-							</div>
-							<div class="form-group">
-								<label>Jours valorises</label> <input type="text"  class="form-control" ng-model="projetcollaborateur.joursvalorises">
-							</div>
-							<button type="button" class="btn btn-primary" ng-click="ajouterprojetcollaborateur()">Ajouter</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</uib-tab>
-		<uib-tab>
-			<tab-heading>
-				<i class="fa fa-clipboard "></i> Objectifs
-			</tab-heading>
-			<div class="row">
-			<div class="col-lg-7">
-			    <div class="row">
-				
-					<div class="spacer panel panel-primary">
-						<div class="panel-heading">
-							<i class="fa fa-info-circle"></i> OBJECTIFS DU COLLABORATEUR
-						</div>
-						<table class="table table-striped table-bordered table-hover table-condensed " >
-							<thead>
-								<tr>
-									<th>Categorie</th>
-									<th>Intitule </th>
-									<th>Annee</th>
-									<th>Description de l'objectif</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody >
-								<tr ng-repeat="o in collaborateur.objectifs">
-									<td>{{o.categorie}}</td>
-									<td> {{o.intitule}}</td>
-									<td>{{o.annee}}</td>
-									<td>{{o.description}}</td>
-									<td><button type="button" class="btn btn-primary btn-sm" ng-click="showform(o)">Evaluer</button></td>
-								</tr>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					
-				</div>
-				<div class="row">
-					
-				<div class="panel panel-primary" ng-show="formulairevaluation">
-  					<div class="panel-body">
-   						   <div class="form-group">
-								<label>Mesure</label> <input type="text" placeholder="comment mesurer l'atteinte de l'objectif" class="form-control" ng-model="evaluation.mesure">
-							</div>
-							<div class="form-group">
-								<label>Responsable Mesure</label> <input type="text" placeholder="ex:(CP/DP, ET)" class="form-control" ng-model="evaluation.responsable">
-							</div>
-							<div class="form-group">
-								<label>Poids de l''objectif</label> <input type="text" placeholder="en %" class="form-control" ng-model="evaluation.poids">
-							</div>
-							<div class="form-group">
-								<label>Resultat</label> <input type="text" placeholder="en %" class="form-control" ng-model="evaluation.resultat">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" ng-model="objectifCourant.id">
-							</div>
-							
-							<button type="button" class="btn btn-primary" ng-click="evaluerprojet()">Evaluer </button>
-  					</div>
-		       </div>
-		       
-		       </div>
-				</div>
-				
-				<div class="col-lg-5 ">
-					<div class="spacer panel panel-primary">
-						<div class="panel-heading">
-							<i class="fa fa-info-circle"></i> Ajouter un objectif
-						</div>
-						<div class="panel-body">
-							<div style="text-align:center;">
-								<i class="fa fa-laptop fa-4x"> </i>
-								<h2>Nouveau objectif</h2>
-							</div>
-							<div class="form-group">
-								<label>Nom</label> <input type="text" placeholder="intitule de l'objectif" class="form-control" ng-model="objectif.nom">
-							</div>
-							<div class="form-group">
-								<label>Categorie</label> <input type="text" placeholder="categorie de l'objectif" class="form-control" ng-model="objectif.categorie">
-							</div>
-							<div class="form-group">
-								<label>Description</label> <input type="text" placeholder="description de l'objectif" class="form-control" ng-model="objectif.description">
-							</div>
-							<div class="form-group">
-								<label>Annee</label> <input type="text" placeholder="intitule de l'objectif" class="form-control" ng-model="objectif.annee">
-							</div>
-							<button type="button" class="btn btn-primary" ng-click="addobjectif()">Ajouter</button>
-						</div>
-					</div>
-				</div>
-				
-				
-			</div>
-			<div class="row"> 
-			<div class="col-lg-7">
-			
-		    </div>
-		    </div>
-		</uib-tab>
-		<uib-tab >
-			<tab-heading>
-				<i class="fa fa-comments-o "></i> Feedbacks
-			</tab-heading>
-			<table class="spacer table table-striped table-bordered table-hover table-condensed " >
-							<thead>
-								<tr>
-									<th>Numero</th>
-									<th>Projet Concerné </th>
-									<th>Commentaire</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody >
-								<tr ng-repeat="f in collaborateur.feedbacks">
-									<td>{{f.id}}</td>
-									<td> {{f.projetCollaborateur.projet.intitule}}</td>
-									<td>{{f.commentaire}}</td>
-									<td>
-									<button type="button" class="btn btn-primary btn-sm" ng-click="showdetailsfeedback(f)">Voir details</button>
-									<button type="button" class="btn btn-primary btn-sm" ng-click="showform(o)">Modifier</button>
-									</td>
-								</tr>
-								</tr>
-							</tbody>
-						</table>
-						<div class="row">
-					
-				<div class="panel panel-primary" ng-show="formulairefeedback">
-				    <div class="panel-heading" >
-							<i class="fa fa-user fa-2x"></i>&nbsp;EN-TETE
-					</div>
-  					<div class="panel-body">
-   						<ul>
-   						  <li>Matricule du collaborateur : {{collaborateur.id}}</li>
-   						  <li>Poste Actuel : {{collaborateur.poste}}</li>
-   						  <li>Nom et Prenom : {{collaborateur.nom}}&nbsp;{{collaborateur.prenom}}</li>
-   						  <li>Code projet :  {{feedbackCourant.projetCollaborateur.projet.id}}</li>
-   						  <li>Nom Projet :  {{feedbackCourant.projetCollaborateur.projet.intitule}}</li>
-   						  <li>Date début et fin de l’intervention: Du&nbsp;{{feedbackCourant.projetCollaborateur.projet.dateDebut}}&nbsp;au&nbsp; {{feedbackCourant.projetCollaborateur.projet.dateFin}}</li>
-   						  <li>Rôle joue au sein de l’équipe projet : {{feedbackCourant.projetCollaborateur.rolecollaborateur}}</li>
-   						  <li>Nombre de jours valorisés sur le projet : {{feedbackCourant.projetCollaborateur.joursvalorises}}</li>
-   						</ul>
-  					</div>
-  					<div class="panel-heading">
-							<i class="fa fa-info-circle"></i> DETAILS
-					</div>
-					<table class="table table-striped table-bordered table-hover table-condensed " >
-							<thead>
-								<tr>
-									<th>Theme</th>
-									<th>Qualification</th>
-									<th>Remarque</th>
-								</tr>
-							</thead>
-							<tbody >
-								<tr ng-repeat="t in pagequalification.themes">
-									<td>{{t.theme.valeur}}</td>
-									<td> {{t.qualification.valeur}}</td>
-									<td>{{t.remarque}}</td>
-								</tr>
-								
-							</tbody>
-						</table>
-					    <div class="panel-footer">
-					       <ul>
-					          <li>Nombre de themes qualifies :  {{pagequalification.nbreThemesQualifies}}</li>
-					          <li>Total Poids obtenu :{{pagequalification.totalPoids}} </li>
-					          <li>Note globale : {{pagequalification.noteGlobale}}</li>
-					       </ul>
-					    </div>
-					
-		       </div>
-		       
-		       </div>
-						
-		</uib-tab>
-	</uib-tabset>
-	<div>
-		<div>
-		</div>
-	</div>
+  <h2 > Details du collaborateur</h2>
+  <uib-tabset>
+    <uib-tab>
+      <tab-heading>
+        <i class="fa fa-user"></i> Profil
+      </tab-heading>
+      <hr>
+      <div class="row">
+        <div class="col-lg-10">
+          <div class="spacer panel panel-primary">
+            <div class="panel-heading">
+              <i class="fa fa-info-circle"></i> Informations sur le collaborateur
+            </div>
+            <table class="table table-striped table-bordered table-hover table-condensed dataTables-example " >
+              <tbody>
+                <tr>
+                  <td>Nom :</td>
+                  <td> {{collaborateur.nom}}</td>
+                </tr>
+                <tr>
+                  <td>Prenom :</td>
+                  <td> {{collaborateur.prenom}}</td>
+                </tr>
+                <tr>
+                  <td>Date de naissance:</td>
+                  <td>{{collaborateur.dateNaissance|date:'dd-MM-yyyy'}}</td>
+                </tr>
+                <tr>
+                  <td>Date d'embauche:</td>
+                  <td> {{collaborateur.dateEmbauche|date:'dd-MM-yyyy'}}</td>
+                </tr>
+                <tr>
+                  <td>Poste Occupe:</td>
+                  <td>{{collaborateur.poste}}</td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td>{{collaborateur.email}}</td>
+                </tr>
+                <tr>
+                  <td>Manager RH:</td>
+                  <td>{{collaborateur.managerRh.nom}}></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab>
+      <tab-heading>
+        <i class="fa fa-desktop "></i> Projets
+      </tab-heading>
+      <hr/>
+      <div class="row" ng-init="getProjetsCollaborateur()">
+        <div class="col-lg-6">
+          <div class="spacer panel panel-primary">
+            <div class="panel-heading">
+              <i class="fa fa-info-circle"></i> PROJETS DU COLLABORATEUR
+            </div>
+            <table class="table table-striped table-bordered table-hover table-condensed dataTables-example" >
+              <thead>
+                <tr>
+                  <th>Intitule</th>
+                  <th>Date de debut </th>
+                  <th>Date de fin</th>
+                  <th>Role</th>
+                  <th>jours valorises</th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr ng-repeat="p in projetsCollavorateur">
+                  <td>{{p.projet.intitule}}</td>
+                  <td> {{p.projet.dateDebut}}</td>
+                  <td>{{p.projet.dateFin}}</td>
+                  <td>{{p.rolecollaborateur}}</td>
+                  <td>{{p.joursvalorises}}</td>
+                </tr>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-offset-1">
+          <div class="spacer panel panel-primary">
+            <div class="panel-heading">
+              <i class="fa fa-info-circle"></i> Attribuer un nouveau Projet
+            </div>
+            <div class="panel-body">
+              <div style="text-align:center;">
+                <i class="fa fa-laptop fa-4x"> </i>
+                <h2>Nouveau Projet</h2>
+              </div>
+              <div class="form-group">
+                <label>Numero du projet</label> <input type="text"  class="form-control" ng-model="projet.id" ng-blur="chercherprojet()">
+              </div>
+              <div class="form-group">
+                <label>Intitule</label> <input type="text"  class="form-control" ng-model="projet.intitule">
+              </div>
+              <div class="form-group">
+                <label>Date de debut</label> <input type="text"  class="form-control" ng-model="projet.dateDebut">
+              </div>
+              <div class="form-group">
+                <label>Date de fin</label> <input type="text" class="form-control" ng-model="projet.dateFin">
+              </div>
+              <div class="form-group">
+                <label>Role</label> <input type="text"  class="form-control" ng-model="projetcollaborateur.role">
+              </div>
+              <div class="form-group">
+                <label>Jours valorises</label> <input type="text"  class="form-control" ng-model="projetcollaborateur.joursvalorises">
+              </div>
+              <button type="button" class="btn btn-primary" ng-click="ajouterprojetcollaborateur()">Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab>
+      <tab-heading>
+        <i class="fa fa-clipboard "></i> Objectifs
+      </tab-heading>
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="row">
+            <div class="spacer panel panel-primary">
+              <div class="panel-heading">
+                <i class="fa fa-info-circle"></i> OBJECTIFS DU COLLABORATEUR
+              </div>
+              <table class="table table-striped table-bordered table-hover table-condensed " >
+                <thead>
+                  <tr>
+                    <th>Categorie</th>
+                    <th>Intitule </th>
+                    <th>Annee</th>
+                    <th>Description de l'objectif</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr ng-repeat="o in collaborateur.objectifs">
+                    <td>{{o.categorie}}</td>
+                    <td> {{o.intitule}}</td>
+                    <td>{{o.annee}}</td>
+                    <td>{{o.description}}</td>
+                    <td><button type="button" class="btn btn-primary btn-sm" ng-click="showform(o)">Evaluer</button></td>
+                  </tr>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel panel-primary" ng-show="formulairevaluation">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label>Mesure</label> <input type="text" placeholder="comment mesurer l'atteinte de l'objectif" class="form-control" ng-model="evaluation.mesure">
+                </div>
+                <div class="form-group">
+                  <label>Responsable Mesure</label> <input type="text" placeholder="ex:(CP/DP, ET)" class="form-control" ng-model="evaluation.responsable">
+                </div>
+                <div class="form-group">
+                  <label>Poids de l''objectif</label> <input type="text" placeholder="en %" class="form-control" ng-model="evaluation.poids">
+                </div>
+                <div class="form-group">
+                  <label>Resultat</label> <input type="text" placeholder="en %" class="form-control" ng-model="evaluation.resultat">
+                </div>
+                <div class="form-group">
+                  <input type="hidden" class="form-control" ng-model="objectifCourant.id">
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="evaluerprojet()">Evaluer </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 ">
+          <div class="spacer panel panel-primary">
+            <div class="panel-heading">
+              <i class="fa fa-info-circle"></i> Ajouter un objectif
+            </div>
+            <div class="panel-body">
+              <div style="text-align:center;">
+                <i class="fa fa-laptop fa-4x"> </i>
+                <h2>Nouveau objectif</h2>
+              </div>
+              <div class="form-group">
+                <label>Nom</label> <input type="text" placeholder="intitule de l'objectif" class="form-control" ng-model="objectif.nom">
+              </div>
+              <div class="form-group">
+                <label>Categorie</label> <input type="text" placeholder="categorie de l'objectif" class="form-control" ng-model="objectif.categorie">
+              </div>
+              <div class="form-group">
+                <label>Description</label> <input type="text" placeholder="description de l'objectif" class="form-control" ng-model="objectif.description">
+              </div>
+              <div class="form-group">
+                <label>Annee</label> <input type="text" placeholder="intitule de l'objectif" class="form-control" ng-model="objectif.annee">
+              </div>
+              <button type="button" class="btn btn-primary" ng-click="addobjectif()">Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-7">
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab >
+      <tab-heading>
+        <i class="fa fa-comments-o "></i> Feedbacks
+      </tab-heading>
+      <table class="spacer table table-striped table-bordered table-hover table-condensed " >
+        <thead>
+          <tr>
+            <th>Numero</th>
+            <th>Projet Concerné </th>
+            <th>Commentaire</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr ng-repeat="f in collaborateur.feedbacks">
+            <td>{{f.id}}</td>
+            <td> {{f.projetCollaborateur.projet.intitule}}</td>
+            <td>{{f.commentaire}}</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm" ng-click="showdetailsfeedback(f)">Voir details</button>
+              <button type="button" class="btn btn-primary btn-sm" ng-click="showform(o)">Modifier</button>
+            </td>
+          </tr>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="panel panel-primary" ng-show="formulairefeedback">
+          <div class="panel-heading" >
+            <i class="fa fa-user fa-2x"></i>&nbsp;EN-TETE
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li>Matricule du collaborateur : {{collaborateur.id}}</li>
+              <li>Poste Actuel : {{collaborateur.poste}}</li>
+              <li>Nom et Prenom : {{collaborateur.nom}}&nbsp;{{collaborateur.prenom}}</li>
+              <li>Code projet :  {{feedbackCourant.projetCollaborateur.projet.id}}</li>
+              <li>Nom Projet :  {{feedbackCourant.projetCollaborateur.projet.intitule}}</li>
+              <li>Date début et fin de l’intervention: Du&nbsp;{{feedbackCourant.projetCollaborateur.projet.dateDebut}}&nbsp;au&nbsp; {{feedbackCourant.projetCollaborateur.projet.dateFin}}</li>
+              <li>Rôle joue au sein de l’équipe projet : {{feedbackCourant.projetCollaborateur.rolecollaborateur}}</li>
+              <li>Nombre de jours valorisés sur le projet : {{feedbackCourant.projetCollaborateur.joursvalorises}}</li>
+            </ul>
+          </div>
+          <div class="panel-heading">
+            <i class="fa fa-info-circle"></i> DETAILS
+          </div>
+          <table class="table table-striped table-bordered table-hover table-condensed " >
+            <thead>
+              <tr>
+                <th>Theme</th>
+                <th>Qualification</th>
+                <th>Remarque</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr ng-repeat="t in pagequalification.themes">
+                <td>{{t.theme.valeur}}</td>
+                <td> {{t.qualification.valeur}}</td>
+                <td>{{t.remarque}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="panel-footer">
+            <ul>
+              <li>Nombre de themes qualifies :  {{pagequalification.nbreThemesQualifies}}</li>
+              <li>Total Poids obtenu :{{pagequalification.totalPoids}} </li>
+              <li>Note globale : {{pagequalification.noteGlobale}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+  <div>
+    <div>
+    </div>
+  </div>
 </div>

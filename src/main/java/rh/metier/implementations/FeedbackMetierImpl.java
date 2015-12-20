@@ -43,49 +43,31 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 	private BilanRepository bilanRepository;
 	
 	
-	
+	/**
+	 * ajouter un theme à un feedback lors de la qualification globale
+	 * 
+	 * @param codeFeedback identifiant du feedback
+	 * @param codeTheme idetifiant du theme
+	 * @param remarque
+	 */
 	@Override
-	//faire ca comme une mise à jour
 	public void addThemeToFeedback(Long codeFeedback, Long codeTheme, String remarque) {
-		//on cherche le theme correspondant a lid
-		Theme th=themeRepository.findOne(codeTheme);
-		//le feedback existe til deja?
-		Feedback f = feedbackRepository.findOne(codeFeedback);
+		
+		Theme th=themeRepository.findOne(codeTheme); //on cherche le theme correspondant a lid
+		Feedback f = feedbackRepository.findOne(codeFeedback);  //le feedback existe til deja?
 		System.out.println(f);
 		Set<FeedbackThemes> ft = feedbackRepository.findByFeedback(codeFeedback);
-
-		for (FeedbackThemes feedbackThemes : ft) {
-			
-			System.out.println("les themes: "+feedbackThemes.getTheme());
-			
-		}
-		
 		feedbackThemesRepository.save(new FeedbackThemes(f, th, null,remarque));
-		// s'il n'existe pas on genere lexception
-		/*if(f==null){
-			throw new RuntimeException("feedback inexistant");
-		}
-		else{
-			// le feedback existe déjà- a-t-il le theme demandé ?
-			boolean trouvé = false;
-			 for (Theme t : feedbackRepository.getThemes(f.getId())){
-				 
-				 if (t.getValeur().equals(th.getValeur())) {
-					  trouvé = true;
-					 break;
-					 }
-			  // si pas trouvé, on crée la relation avec le theme
-				 if (!trouvé) {
-					 
-					 ft.add(new FeedbackThemes(f, th, null,remarque));
-				 ft.setFeedback(f);
-				 ft.setTheme(th);
-				 feedbackThemesRepository.save(new FeedbackThemes(f, th, null,remarque));
-				 }
-			 }
-		}*/
 		
 	}
+	
+	/**
+	 * renseigner un feedback
+	 * @param matriculeCollaborateur 
+	 * @param idProjet
+	 * @param f feedback
+	 * @return Feedback
+	 */
 	public Feedback ajouterFeedback(Long matriculeCollaborateur, Long idProjet, Feedback f) {
 		     Collaborateur c = collaborateurRepository.findOne(matriculeCollaborateur);
 		     ProjetCollaborateur pc = projetCollaborateurRepository.findOne(idProjet);
@@ -97,29 +79,45 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 		     collaborateurRepository.saveAndFlush(c);
 		     return f;
 	}
+	
+	/**
+	 * recuperer un feedback
+	 * @param idfeedback
+	 * @return Feedback
+	 */
 	@Override
 	public Feedback getFeedback(Long idfeedback) {
 		return feedbackRepository.findOne(idfeedback);
 	}
+	
+	/**
+	 * recuperer tous les feedback d'un collaborateur
+	 * 
+	 * @param idCollaborateur matricule du collaborateur
+	 * @return {@link List} Feedback
+	 */
 	@Override
 	public List<Feedback> findFeedbacksByCollaborateur(Long idCollaborateur) {
 		return feedbackRepository.findFeedbacksByCollaborateur(idCollaborateur);
 		
 	}
+	
+	/**
+	 * recuperer tous les themes qualifies lors d'un feedback
+	 * 
+	 * @param idFeedback
+	 * @param p numero de la page
+	 * @param s taille de la page
+	 * 
+	 */
 	@Override
 	public PageQualificationGlobale gethemesqualifies(Long idFeedback, int p, int s) {
-		  /*int poidsglobal =0;
-		int nbreThemesQualifies=0;*/
+	
+		Page<FeedbackThemes> themesByFeedback = feedbackRepository.getThemesV2(idFeedback, new PageRequest(p,s));//on recupere tous les themes du feedback 
 		
-		//on recupere tous les themes du feedback 
-		Page<FeedbackThemes> themesByFeedback = feedbackRepository.getThemesV2(idFeedback, new PageRequest(p,s));
-		//on cree une page de qualification globale
-		PageQualificationGlobale pqp= new PageQualificationGlobale();
+		PageQualificationGlobale pqp= new PageQualificationGlobale();//on cree une page de qualification globale
 		int poidsglobal = pqp.getTotalPoids();
 		int nbreThemesQualifies = pqp.getNbreThemesQualifies();
-		
-		
-		//
 		Set<FeedbackThemes> ft =feedbackRepository.findByFeedback(idFeedback);
 		//on lui assigne les themes
 	    Set<Qualification> qualifs = new HashSet<Qualification>() ;
@@ -128,33 +126,18 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 	    }
 	
 		pqp.setThemes(themesByFeedback.getContent());
-		//on recupere le nombre total de themes qualifies
-		/*for ( FeedbackThemes ftcourant : ft) {
-			if (!ftcourant.getQualification().getValeur().equals("NA")) {
-				nbreThemesQualifies++;
-			}
-		
-		}*/
 		for (Qualification qualification : qualifs) {
 			if(!qualification.getValeur().equals("NA")){
 				
 			nbreThemesQualifies++;
 			}
 		}
-		
-		
 		pqp.setNbreThemesQualifies(nbreThemesQualifies);
-		System.out.println(pqp.getNbreThemesQualifies());
 		for (Qualification qualification : qualifs) {
 			int poidsCourant = qualification.getPoids();
 			poidsglobal=poidsglobal+poidsCourant;
 			
 		}
-		/*for (FeedbackThemes ftcourant : ft) {
-			
-			int poidsCourant  =ftcourant.getQualification().getPoids();
-			poidsglobal=poidsglobal+poidsCourant;
-		}*/
 		pqp.setTotalPoids(poidsglobal);
 		System.out.println(pqp.getTotalPoids());
 		if(pqp.getNbreThemesQualifies()!=0){
@@ -169,6 +152,14 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 		
 		return feedbackRepository.getThemes(idFeedback);
 	}
+	
+	/**
+	 * ajouter un feedback à un bilan
+	 * 
+	 * @param idBilan
+	 * @param idFeedbak
+	 * @return boolean
+	 */
 	@Override
 	public boolean addBilanToFeedback(Long idBilan, Long idFeedbak) {
 		BilanPerformance b = bilanRepository.findOne(idBilan);

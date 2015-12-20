@@ -1,31 +1,31 @@
 <div class="hr-line-dashed"></div>
-             
-             <div class="ibox-content"  >
-                 <form method="post" class="form-horizontal" role="form">
-                 <div class="form-group"><label class="col-sm-2 ">Intitule</label>
-                	<div class="col-sm-6">
-                		<input type="text" ng-model="projet.intitule" class="form-control">
-                	</div>
-             	  </div> 
-             	  <div class="form-group"><label class="col-sm-2">Date de debut</label>
-                	<div class="col-sm-6 date">
-                	    <div class="input-group input-append date" id="datePicker">
-                		<input type="date" ng-model="projet.dateDebut" class="form-control">
-                		<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                		
-                		</div>
-                	</div>
-             	  </div> 
-             	  <div class="form-group" >
-                        <label class="col-sm-2 ">Date de fin</label>
-                            <div class="col-sm-6 date">
-                                <div class="input-group input-append date" id="datePicker">
-                                <input type="date" ng-model="projet.dateFin" class="form-control">
-                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                            </div>
-                   </div>
-                   <div growl></div>
-                   <button type="submit" class="btn btn-primary btn-sm" ng-click="ajouterProjet()">Ajouter</button>
-             	  </form>  
-         	 </div>
+<div class="ibox-content"  >
+  <form method="post" class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-sm-2 ">Intitule</label>
+      <div class="col-sm-6">
+        <input type="text" ng-model="projet.intitule" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2">Date de debut</label>
+      <div class="col-sm-6 date">
+        <div class="input-group input-append date" id="datePicker">
+          <input type="date" ng-model="projet.dateDebut" class="form-control">
+          <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" >
+      <label class="col-sm-2 ">Date de fin</label>
+      <div class="col-sm-6 date">
+        <div class="input-group input-append date" id="datePicker">
+          <input type="date" ng-model="projet.dateFin" class="form-control">
+          <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+    </div>
+    <div growl></div>
+    <button type="submit" class="btn btn-primary btn-sm" ng-click="ajouterProjet()">Ajouter</button>
+  </form>
+</div>

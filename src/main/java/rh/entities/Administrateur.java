@@ -24,7 +24,12 @@ public class Administrateur implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+    /**
+     * Constructeur de la classe administrateur
+     * @param id
+     * @param nom
+     * @param prenom
+     */
 	public Administrateur(Long id, String nom, String prenom) {
 		super();
 		this.id = id;

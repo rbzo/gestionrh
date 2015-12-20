@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, length=3, name="TYPE_BILAN")
 
+
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
 @JsonSubTypes({
 	@Type(name="BAP", value=BAP.class),

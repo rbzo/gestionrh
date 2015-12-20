@@ -16,7 +16,7 @@ app.config(['$routeProvider',
 					controller: 'rhController'
 				})
 				.when('/addCollabo',{
-					templateUrl:'partials/ajout.html',
+					templateUrl:'partials/ajoutCollaborateur.html',
 					controller: 'rhController'
 				})
 				.when('/Collaborateurs/:ref', {

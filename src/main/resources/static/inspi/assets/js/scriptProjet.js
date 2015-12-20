@@ -60,12 +60,7 @@ app2.controller('projetController', function($scope, $http,$routeParams, growl, 
 			});
 		}
 	    
-	
-	
-	
-	
-		
-	
+
 	
 });
 
