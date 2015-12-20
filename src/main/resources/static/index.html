@@ -12,7 +12,7 @@
     
 
     <link href="inspi/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="inspi/assets/css/angular-growl.css" rel="stylesheet">
+    <link href="inspi/assets/css/angular-growl.min.css" rel="stylesheet">
     <link href="inspi/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="inspi/assets/js/jquery.steps.css" rel="stylesheet">
 
@@ -41,20 +41,6 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="inspi/assets/img/profile_small.jpg" />
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Mohamed Ali</strong>
-                             </span> <span class="text-muted text-xs block">Directeur Technique <b class="caret"></b></span> </span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
-                        </ul>
-                    </div>
                     <div class="logo-element">
                         SQLI
                     </div>
@@ -70,11 +56,9 @@
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion des bilans</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="#/addFeedback"><i class="fa fa-circle-o"></i>Renseigner le feedback</a></li>
-                        <li class="active"><a href="#/addCollabo"><i class="fa fa-circle-o"></i>Consulter les feedback</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Renseigner les objectifs</a></li>
                         <li><a href="#/addObjectif"><i class="fa fa-circle-o"></i>Ajouter un objectif</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Consulter les objectifs</a></li>
-                        <li><a href="#/addbilan"><i class="fa fa-circle-o"></i>Ajouter un bilan</a></li>
+                        <li><a href="#/addbilanAnnuel"><i class="fa fa-circle-o"></i>Ajouter un bilan Annuel</a></li>
+                        <li><a href="#/addbilanInter"><i class="fa fa-circle-o"></i>Ajouter un bilan intermediaire</a></li>
                     </ul>
                 </li>
                  <li class="active" style="font-size:11px">
@@ -95,7 +79,7 @@
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
             <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                 <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                    <input type="text" placeholder="" class="form-control" name="top-search" id="top-search">
                 </div>
             </form>
         </div>
@@ -103,11 +87,7 @@
                 <li>
                     <span class="m-r-sm text-muted welcome-message">Bienvenue</span>
                 </li>
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
+                
                 </ul>
 
         </nav>
@@ -136,6 +116,7 @@
             <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
+                
                 <div class="ibox float-e-margins" ng-view>
             </div>
                  
@@ -148,7 +129,7 @@
     <script type="text/javascript" src="inspi/assets/angular/angular.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/angular-route.min.js"></script>
-    <script type="text/javascript" src="inspi/assets/angular/angular-growl.js"></script>
+    <script type="text/javascript" src="inspi/assets/angular/angular-growl.min.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/dirPagination.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/ng-modules.js"></script>
     <script type="text/javascript" src="inspi/assets/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
@@ -166,6 +147,7 @@
     <script type="text/javascript" src="inspi/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script type="text/javascript" src="inspi/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="inspi/assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+    
     
   
 

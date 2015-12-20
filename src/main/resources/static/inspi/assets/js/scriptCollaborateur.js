@@ -23,8 +23,13 @@ app.config(['$routeProvider',
 					templateUrl: 'partials/details_collaborateur.html',
 					controller:'rhController'
 				})
+				.when('/', {
+					templateUrl: 'partials/accueil.html',
+					controller:'rhController'
+				})
+				
 				.otherwise({
-					redirectTo:'/allCollabo'
+					redirectTo:'/'
 				});
 }
 ]);
@@ -34,7 +39,7 @@ app.config(['$routeProvider',
 /**
  * Contrôleur de l'application app
  */
-app.controller('rhController', function($scope, $http, $routeParams, growl, $location,$window){
+app.controller('rhController', function($scope, $http, $routeParams, growl, $location,$window,$timeout){
 	
     $scope.user={};
 	$scope.collaborateurs=[];
@@ -79,9 +84,10 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 			$scope.user.prenom="";
 			$scope.user.dateEmbauche="";
 			$scope.user.email="";
-			$location.path("/");
-			$scope.$apply();
+			/*$location.path("/allCollabo");
+			$scope.$apply();*/
 			growl.success('Collaborateur ajouté avec succes.',{title: 'Success!'});
+			$timeout(function() { $scope.$apply(function() { $location.path("/allCollabo"); }); }, 3000);
 			
 		});
 

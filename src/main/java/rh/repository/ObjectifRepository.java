@@ -19,7 +19,7 @@ public interface ObjectifRepository extends JpaRepository<Objectif, Long> {
 	
 	//les objectifs d'un collaborateur
 	@Query("select o from Objectif o where o.collaborateur.id=:x")
-	public Set<Objectif> findOjectifsByCollaborateur(@Param("x") Long idCollaborateur);
+	public List<Objectif> findOjectifsByCollaborateur(@Param("x") Long idCollaborateur);
 /*	
 	//les objectifs depuis la date d'embauche
 	@Query("select o from Objectif o where o.collaborateur.dateEmbauche  ")

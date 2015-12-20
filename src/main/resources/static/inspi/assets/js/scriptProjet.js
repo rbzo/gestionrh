@@ -26,7 +26,7 @@ app2.config(['$routeProvider',
 /**
  * Contrôleur de l'application app2
  */
-app2.controller('projetController', function($scope, $http,$routeParams, growl, $location){
+app2.controller('projetController', function($scope, $http,$routeParams, growl, $location, $timeout){
 	$scope.projets=[];
 	$scope.projet={};
 	$scope.pageCourante=0;
@@ -46,6 +46,7 @@ app2.controller('projetController', function($scope, $http,$routeParams, growl, 
 		.success(function(response){
 			//$scope.produits.push("da");
 		        growl.success('Projet ajouté avec succes.');
+		        $timeout(function() { $scope.$apply(function() { $location.path("/projets"); }); }, 3000);
 			console.log ("projet ajouté");
 		});
 

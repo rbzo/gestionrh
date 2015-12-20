@@ -112,7 +112,7 @@ public class Objectif implements Serializable{
 	}
 
 
-
+@JsonIgnore
 	public BilanPerformance getBilanPerformance() {
 		return bilanPerformance;
 	}
