@@ -16,5 +16,6 @@ public interface IfeedbackMetier {
 	public PageQualificationGlobale gethemesqualifies(Long idFeedback, int page, int size);
 	public Set<Theme> getThemesByfeedback(Long idFeedback);
 	//public boolean addProjetToFeedback(Long codeFeedback, Long codeProjet);
+	public boolean addBilanToFeedback(Long idBilan, Long idFeedbak);
 
 }

@@ -8,16 +8,37 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("BIP")
 public class BIP extends BilanPerformance{
+	private String planAmelioration;
+	
+
+	public String getPlanAmelioration() {
+		return planAmelioration;
+	}
+
+
+	public void setPlanAmelioration(String planAmelioration) {
+		this.planAmelioration = planAmelioration;
+	}
+
 
 	public BIP() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public BIP(Long id, Date dateDebut, Date dateFin, String statut) {
-		super(id, dateDebut, dateFin, statut);
+
+	public BIP(Long id, Date dateDebut, Date dateFin, String planAmelioration) {
+		super(id, dateDebut, dateFin);
+		this.planAmelioration = planAmelioration;
+	}
+
+
+	public BIP(Long id, Date dateDebut, Date dateFin) {
+		super(id, dateDebut, dateFin);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
 	
 
 }

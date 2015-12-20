@@ -20,15 +20,13 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, Lo
 
 	  public Set<Collaborateur> allcollabo();
 	//liste des projets d'un collaborateur identifié par son id
-		@Query("select pc from ProjetCollaborateur pc where pc.collaborateur.id=:x")
+		@Query("select pc from ProjetCollaborateur pc where pc.collaborateur.id=:x ")
 		Set<ProjetCollaborateur> getProjetsByCollaborateur(@Param("x") Long idCollaborateur);
 		
-	//liste des bilans d'un collaborateur identifié par son matricule
-		@Query("select c.bilanPerformances from Collaborateur c where c.id=:x")
-		Set<BilanPerformance> getAllBilansByCollbaorateur(@Param("x") long idCollaborateur);
+
 		
     //retouver le dernier bilan d'un collaborateur
-		@Query("select c.bilanperformances from Collaborateur c where c.id=:x")
+		@Query("select c.bilanPerformances from Collaborateur c where c.id=:x")
 		Page<BilanPerformance> getLastbilanBycollaborateur(@Param("x") Long idCollaborateur, Pageable p);
 		
 		

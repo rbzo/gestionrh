@@ -15,6 +15,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -35,31 +37,32 @@ public class BilanPerformance implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+	private String intitule;
     private Date dateDebut;
     private Date dateFin;
-    private String statut;
+    
     
     @OneToMany(mappedBy="bilanPerformance")
-    private Collection<EvaluationObjectif> objectifs;
+    private Collection<EvaluationObjectif> objectifsAnneecourante;
     
     @OneToMany(mappedBy="bilanPerformance")
-    private Collection<Feedback> feedbacks;
+    private Collection<Objectif> objectifsAnneeProchaine;
     
     @ManyToOne
     @JoinColumn(name="ID_COLLABORATEUR")
     private Collaborateur collaborateur;
+    
 
 	public BilanPerformance() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BilanPerformance(Long id, Date dateDebut, Date dateFin, String statut) {
+	public BilanPerformance(Long id, Date dateDebut, Date dateFin) {
 		super();
 		this.id = id;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.statut = statut;
 	}
 	
 
@@ -70,7 +73,7 @@ public class BilanPerformance implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	public Date getDateDebut() {
 		return dateDebut;
 	}
@@ -78,7 +81,7 @@ public class BilanPerformance implements Serializable{
 	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	public Date getDateFin() {
 		return dateFin;
 	}
@@ -87,30 +90,6 @@ public class BilanPerformance implements Serializable{
 		this.dateFin = dateFin;
 	}
 
-	public String getStatut() {
-		return statut;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
-
-
-	public Collection<EvaluationObjectif> getObjectifs() {
-		return objectifs;
-	}
-
-	public void setObjectifs(Collection<EvaluationObjectif> objectifs) {
-		this.objectifs = objectifs;
-	}
-
-	public Collection<Feedback> getFeedbacks() {
-		return feedbacks;
-	}
-
-	public void setFeedbacks(Collection<Feedback> feedbacks) {
-		this.feedbacks = feedbacks;
-	}
 
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
@@ -119,6 +98,35 @@ public class BilanPerformance implements Serializable{
 	public void setCollaborateur(Collaborateur collaborateur) {
 		this.collaborateur = collaborateur;
 	}
+
+	public Collection<EvaluationObjectif> getObjectifsAnneecourante() {
+		return objectifsAnneecourante;
+	}
+
+	public void setObjectifsAnneecourante(
+			Collection<EvaluationObjectif> objectifsAnneecourante) {
+		this.objectifsAnneecourante = objectifsAnneecourante;
+	}
+
+	public Collection<Objectif> getObjectifsAnneeProchaine() {
+		return objectifsAnneeProchaine;
+	}
+
+	public void setObjectifsAnneeProchaine(
+			Collection<Objectif> objectifsAnneeProchaine) {
+		this.objectifsAnneeProchaine = objectifsAnneeProchaine;
+	}
+
+	public String getIntitule() {
+		return intitule;
+	}
+
+	public void setIntitule(String intitule) {
+		this.intitule = intitule;
+	}
+	
+	
+	
 	
 	
     

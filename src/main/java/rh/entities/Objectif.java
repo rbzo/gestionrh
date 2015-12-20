@@ -2,6 +2,7 @@ package rh.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,38 +32,43 @@ public class Objectif implements Serializable{
 	private String intitule;
 	private String description;
 	
-	private String annee;
+	private Date DateAjout;
 
 	
 	@ManyToOne
 	@JoinColumn(name="ID_COLLABORATEUR")
 	private Collaborateur collaborateur;
 	
+	@ManyToOne
+	@JoinColumn(name="ID_BILAN")
+	private BilanPerformance bilanPerformance;
+	
 	
 	public Objectif() {
 		super();
 		// TODO Auto-generated constructor stub
+		
 	}
 
     
 
-	public Objectif(String categorie, String intitule,String description, String annee) {
+	public Objectif(String categorie, String intitule,String description, Date dateAjout) {
 		super();
 		this.categorie = categorie;
 		this.intitule = intitule;
 		this.description=description;
-		this.annee = annee;
+		this.DateAjout = dateAjout;
 	}
 
 
 
-	public Objectif(Long id, String categorie, String intitule, String annee,
+	public Objectif(Long id, String categorie, String intitule,  Date dateAjout,
 			int pourcentageAvancement) {
 		super();
 		this.id = id;
 		this.categorie = categorie;
 		this.intitule = intitule;
-		this.annee = annee;
+		this.DateAjout = dateAjout;
 	}
 
 
@@ -92,18 +99,33 @@ public class Objectif implements Serializable{
 		this.intitule = intitule;
 	}
 
-
-	public String getAnnee() {
-		return annee;
-	}
-
-	public void setAnnee(String annee) {
-		this.annee = annee;
-	}
-
 	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    public Date getDateAjout() {
+		return DateAjout;
+	}
 
-    @JsonIgnore
+
+
+	public void setDateAjout(Date dateAjout) {
+		DateAjout = dateAjout;
+	}
+
+
+
+	public BilanPerformance getBilanPerformance() {
+		return bilanPerformance;
+	}
+
+
+
+	public void setBilanPerformance(BilanPerformance bilanPerformance) {
+		this.bilanPerformance = bilanPerformance;
+	}
+
+
+
+	@JsonIgnore
 	public Collaborateur getCollaborateur() {
 		return collaborateur;
 	}

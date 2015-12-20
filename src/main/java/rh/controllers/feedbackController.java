@@ -63,6 +63,13 @@ public class feedbackController {
     	return feedbackMetier.getThemesByfeedback(idFeedback);
     }
     
+    @RequestMapping(value="{/idFeedback}/bilan", method=RequestMethod.POST)
+	public boolean addBilanToFeedback(@RequestParam Long idBilan, @PathVariable Long idFeedbak) {
+		return feedbackMetier.addBilanToFeedback(idBilan, idFeedbak);
+	}
+    
+    
+    
 	
 	
 

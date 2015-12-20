@@ -17,8 +17,8 @@ public interface ICollaborateurMetier {
 	public void deleteCollaborateur(Long refCollaborateur);
 	public ProjetCollaborateur addProjetToCollaborateur(Long idProjet, Long IdCollaborateur, String rolejoue, int joursvalorises);
 	public Set<ProjetCollaborateur> getProjetsByCollaborateur(Long idCollaborateur);
-	public Set<BilanPerformance> getBilansByCollaborateur(Long idCollaborateur);
 	//retrouver le dernier bilan de performance d'un collaborateur
 	public Page<BilanPerformance> getLastBilanBycollaborateur(Long matriculeCollaborateur);
+	public String nouveauPoste(String poste, Long matriculeCollaborateur);
 	
 }

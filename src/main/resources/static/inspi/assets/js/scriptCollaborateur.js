@@ -144,7 +144,7 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	
 	$scope.addobjectif = function () {
 		var id1= $routeParams.ref;
-		var obj ={"categorie": $scope.objectif.categorie ,"intitule":$scope.objectif.nom,"description":$scope.objectif.description ,"annee":$scope.objectif.annee};
+		var obj ={"categorie": $scope.objectif.categorie ,"intitule":$scope.objectif.nom,"description":$scope.objectif.description ,"DateAjout":$scope.objectif.annee};
 		$http.post("http://localhost:1111/collaborateurs/"+id1+"/objectifs", obj)
 		.success(function(response){
 			$scope.collaborateur.objectifs.push(response);

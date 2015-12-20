@@ -74,10 +74,25 @@ public class collaborateurController {
 	public Set<ProjetCollaborateur> getProjetsByCollaborateur(@PathVariable Long idCollaborateur) {
 		return collaborateurMetier.getProjetsByCollaborateur(idCollaborateur);
 	}
-    @RequestMapping(value="{idCollaborateur}/bilans", method = RequestMethod.GET)
+    @RequestMapping(value="/{idCollaborateur}/poste" ,method=RequestMethod.PUT)
+	@ResponseBody
+	public boolean nouveauPoste(@RequestParam String poste, @PathVariable(value="idCollaborateur") Long matriculeCollaborateur) {
+		 collaborateurMetier.nouveauPoste(poste, matriculeCollaborateur);
+		 return true;
+	}
+    
+  /*  @RequestMapping(value="/{idCollaborateur}/bilans", method = RequestMethod.GET)
 	public Set<BilanPerformance> getBilansByCollaborateur(@PathVariable Long idCollaborateur) {
 		return collaborateurMetier.getBilansByCollaborateur(idCollaborateur);
-	}
+	}*/
+    /*@RequestMapping(value="{idCollaborateur}/bilans/last", method=RequestMethod.POST)
+	public Page<BilanPerformance> getLastBilanBycollaborateur(@PathVariable Long idCollaborateur) {
+		return collaborateurMetier.getLastBilanBycollaborateur(idCollaborateur);
+	}*/
+    
+    
+    
+    
     
     
 	

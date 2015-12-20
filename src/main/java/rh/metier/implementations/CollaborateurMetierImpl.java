@@ -64,15 +64,24 @@ public class CollaborateurMetierImpl implements ICollaborateurMetier{
 		return collaborateurRepository.getProjetsByCollaborateur(idCollaborateur);
 	}
 
-	@Override
+	/*@Override
 	public Set<BilanPerformance> getBilansByCollaborateur(Long idCollaborateur) {
 		return collaborateurRepository.getAllBilansByCollbaorateur(idCollaborateur);
-	}
+	}*/
 
 	@Override
 	public Page<BilanPerformance> getLastBilanBycollaborateur(
 			Long matriculeCollaborateur) {
+		
 		return collaborateurRepository.getLastbilanBycollaborateur(matriculeCollaborateur, new PageRequest(0, 1, Sort.Direction.DESC, "dateFin"));
+	}
+
+	@Override
+	public String nouveauPoste(String poste, Long matriculeCollaborateur) {
+		Collaborateur c = collaborateurRepository.findOne(matriculeCollaborateur);
+		c.setPoste(poste);
+		collaborateurRepository.save(c);
+		return poste;
 	}
 
 

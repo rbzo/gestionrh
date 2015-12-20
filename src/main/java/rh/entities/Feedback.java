@@ -95,6 +95,8 @@ public class Feedback implements Serializable{
 	public void setBilanPerformance(BilanPerformance bilanPerformance) {
 		this.bilanPerformance = bilanPerformance;
 	}
+	
+	
 
 	/*public Collection<Theme> getThemes() {
 		return themes;

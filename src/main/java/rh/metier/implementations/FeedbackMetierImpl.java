@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import rh.entities.BilanPerformance;
 import rh.entities.Collaborateur;
 import rh.entities.Feedback;
 import rh.entities.FeedbackThemes;
@@ -20,6 +21,7 @@ import rh.entities.Qualification;
 import rh.entities.Theme;
 import rh.metier.interfaces.IProjetMetier;
 import rh.metier.interfaces.IfeedbackMetier;
+import rh.repository.BilanRepository;
 import rh.repository.CollaborateurRepository;
 import rh.repository.FeedbackThemesRepository;
 import rh.repository.ProjetCollaborateurRepository;
@@ -37,6 +39,8 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 	private FeedbackThemesRepository feedbackThemesRepository;
 	@Autowired
 	private ProjetCollaborateurRepository projetCollaborateurRepository;
+	@Autowired
+	private BilanRepository bilanRepository;
 	
 	
 	
@@ -164,6 +168,14 @@ public class FeedbackMetierImpl implements IfeedbackMetier{
 	public Set<Theme> getThemesByfeedback(Long idFeedback) {
 		
 		return feedbackRepository.getThemes(idFeedback);
+	}
+	@Override
+	public boolean addBilanToFeedback(Long idBilan, Long idFeedbak) {
+		BilanPerformance b = bilanRepository.findOne(idBilan);
+		Feedback f = feedbackRepository.findOne(idFeedbak);
+		f.setBilanPerformance(b);
+		feedbackRepository.save(f);
+		return true;
 	}
 	
 	

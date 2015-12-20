@@ -104,12 +104,14 @@ public String getPrenom() {
 public void setPrenom(String prenom) {
 	this.prenom = prenom;
 }
+@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 public Date getDateNaissance() {
 	return dateNaissance;
 }
 public void setDateNaissance(Date dateNaissance) {
 	this.dateNaissance = dateNaissance;
 }
+@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 public Date getDateEmbauche() {
 	return dateEmbauche;
 }
