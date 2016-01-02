@@ -15,6 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -48,7 +49,7 @@ public class BilanPerformance implements Serializable{
     
     @OneToMany(mappedBy="bilanPerformance")
     private Collection<Objectif> objectifsAnneeProchaine;
-    
+
     @ManyToOne
     @JoinColumn(name="ID_COLLABORATEUR")
     private Collaborateur collaborateur;

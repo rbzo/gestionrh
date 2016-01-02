@@ -1,13 +1,20 @@
 package rh.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import javax.ws.rs.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +44,16 @@ public class collaborateurController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-	public Collaborateur ajoutcollabo(@RequestBody Collaborateur c){
+	//@Secured(value={"ROLE_ADMIN"})
+	public Object ajoutcollabo(@RequestBody @Valid Collaborateur c, BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			Map<String, Object> errors  = new HashMap<>();
+			errors.put("errors", true);
+			for (FieldError fe : bindingResult.getFieldErrors()) {
+				errors.put(fe.getField(), fe.getDefaultMessage());
+			}
+			return errors;
+		}
 		collaborateurMetier.addCollaborateur(c);
 		return c;
 	
@@ -45,6 +61,7 @@ public class collaborateurController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
+	//@Secured(value={"ROLE_ADMIN"})
 	public Page<Collaborateur> allcollabo(int page){
 		return collaborateurMetier.getallcollaborateurs(page);
 	}
@@ -53,7 +70,19 @@ public class collaborateurController {
 	@RequestMapping("/{ref}")
 	@ResponseBody
 	   public Collaborateur getCollaborateur(@PathVariable Long ref){
-		return collaborateurMetier.getCollaborateur(ref);
+		Collaborateur c = collaborateurMetier.getCollaborateur(ref);
+		if(c==null){
+			throw new NotFoundException("Collaborateur non trouvé avec le matricule:"+ref);
+		}
+		/*if (bindingResult.hasErrors()) {
+			Map<String, Object> errors = new HashMap<>();
+			errors.put("errors", true);
+			for (FieldError fe : bindingResult.getFieldErrors()) {
+				errors.put(fe.getField(), fe.getDefaultMessage());
+			}
+			return errors;
+		}*/
+		return c;
 	}
 	
 	@RequestMapping(value="/{ref}", method=RequestMethod.DELETE)

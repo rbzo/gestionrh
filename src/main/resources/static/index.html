@@ -8,7 +8,7 @@
 
     <title>Liste des Collaborateurs</title>
     <!-- <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel='stylesheet' type='text/css'> -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     
 
     <link href="inspi/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -68,6 +68,14 @@
                         <li><a href="#/../addProjet"><i class="fa fa-circle-o"></i>Ajouter un projet</a></li>
                     </ul>
                 </li>
+                <li class="active" style="font-size:11px">
+                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion des utilisateurs</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="#/addFeedback"><i class="fa fa-circle-o"></i>Ajouter un utilisateur</a></li>
+                        <li><a href="#/addObjectif"><i class="fa fa-circle-o"></i>Supprimer un utilisateur</a></li>
+                        <li><a href="#/addbilanAnnuel"><i class="fa fa-circle-o"></i>Modifier un utilisateur</a></li>
+                    </ul>
+                </li>
                 </ul>
 
         </div>
@@ -87,8 +95,13 @@
                 <li>
                     <span class="m-r-sm text-muted welcome-message">Bienvenue</span>
                 </li>
+                <li>
+                    <a href="login">
+                        <i class="fa fa-sign-out"></i> Deconnexion
+                    </a>
+                </li>
                 
-                </ul>
+            </ul>
 
         </nav>
         </div>
@@ -120,7 +133,7 @@
                 <div class="ibox float-e-margins" ng-view>
             </div>
                  
- 
+            <div growl></div>
         </div>
     </div>
     <script src="inspi/assets/js/jquery-2.1.1.js"></script>
@@ -133,6 +146,7 @@
     <script type="text/javascript" src="inspi/assets/angular/dirPagination.js"></script>
     <script type="text/javascript" src="inspi/assets/angular/ng-modules.js"></script>
     <script type="text/javascript" src="inspi/assets/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    
 	<script type="text/javascript" src="inspi/assets/js/scriptCollaborateur.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptProjet.js"></script>
 	<script type="text/javascript" src="inspi/assets/js/scriptfeedback.js"></script>

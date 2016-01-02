@@ -2,6 +2,7 @@ package rh.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Date;
 import java.util.Set;
@@ -17,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 
@@ -34,8 +37,13 @@ public class Collaborateur implements Serializable{
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
    private Long id;
+   @NotNull
+   @Size(min=2 , max=20)
    private String nom;
+   @NotNull
+   @Size(min=2 , max=20)
    private String prenom;
+   @NotNull
    private Date dateNaissance;
    private Date dateEmbauche;
    private String poste;
@@ -50,7 +58,8 @@ public class Collaborateur implements Serializable{
    private Set<Feedback> feedbacks;
    
    @OneToMany(mappedBy="collaborateur", cascade=CascadeType.ALL)
-   private Set<Objectif> objectifs;
+   //private Set<Objectif> objectifs;
+   private List<Objectif> objectifs;
 
    
    @OneToMany(mappedBy="collaborateur", cascade=CascadeType.ALL)
@@ -146,10 +155,10 @@ public void setFeedbacks(Set<Feedback> feedbacks) {
 	this.feedbacks = feedbacks;
 }
 //@JsonIgnore
-public Set<Objectif> getObjectifs() {
+public List<Objectif> getObjectifs() {
 	return objectifs;
 }
-public void setObjectifs(Set<Objectif> objectifs) {
+public void setObjectifs(List<Objectif> objectifs) {
 	this.objectifs = objectifs;
 }
 public Set<BilanPerformance> getBilanPerformances() {

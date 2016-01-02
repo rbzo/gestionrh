@@ -7,8 +7,8 @@ var app = angular.module('rh', ['ngRoute','angular-growl','ui.bootstrap']);
  * configuration du module principal
  */
 
-app.config(['$routeProvider',
-            function($routeProvider){
+app.config(['$routeProvider','growlProvider',
+            function($routeProvider,growlProvider){
 			//systeme de routage
 				$routeProvider
 				.when('/allCollabo',{
@@ -31,8 +31,13 @@ app.config(['$routeProvider',
 				.otherwise({
 					redirectTo:'/'
 				});
+				growlProvider.globalTimeToLive(3000);
 }
 ]);
+
+/*app.config(['growlProvider', function (growlProvider) {
+  growlProvider.globalTimeToLive(3000);
+}]);*/
 
 
 
@@ -60,6 +65,7 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	$scope.evaluation={};
 	$scope.feedbacks=[];
 	$scope.pagequalification = {};
+	$scope.errors = null;
 	
 	$scope.lister=function(){
 		$http.get("http://localhost:1111/collaborateurs?page="+$scope.pageCourante)
@@ -78,16 +84,20 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 		var utilisateur={"nom":$scope.user.nom , "prenom": $scope.user.prenom ,"dateNaissance":$scope.user.dateNaissance,"dateEmbauche":$scope.user.dateEmbauche , "poste":$scope.user.poste, "email": $scope.user.email }
 		$http.post("http://localhost:1111/collaborateurs", utilisateur)
 		.success(function(response){
-		        growl.success('Collaborateur ajouté avec succes.',{title: 'Success!'});
-			console.log ("collaborateur ajouté");
-			$scope.user.nom="";
-			$scope.user.prenom="";
-			$scope.user.dateEmbauche="";
-			$scope.user.email="";
-			/*$location.path("/allCollabo");
-			$scope.$apply();*/
-			growl.success('Collaborateur ajouté avec succes.',{title: 'Success!'});
-			$timeout(function() { $scope.$apply(function() { $location.path("/allCollabo"); }); }, 3000);
+			if(!response.errors){
+				console.log ("collaborateur ajouté");
+				$scope.user.nom="";
+				$scope.user.prenom="";
+				$scope.user.dateEmbauche="";
+				$scope.user.email="";
+				$scope.errors = null;
+				growl.success('Collaborateur ajouté avec succes.',{title: 'Success!'});
+				$timeout(function() { $scope.$apply(function() { $location.path("/allCollabo"); }); }, 3000);
+				console.log(response);
+			}
+			else{
+				$scope.errors = response;
+			}   
 			
 		});
 
