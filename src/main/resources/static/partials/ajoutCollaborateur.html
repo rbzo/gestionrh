@@ -1,6 +1,12 @@
 
 <div class="hr-line-dashed"></div>
 <div class="ibox-content"  >
+  <form>
+  <label> <input type="radio"  name="checkboxValue" ng-model="checkboxValue" value="option1"> <i></i> Collaborateur </label>&nbsp;
+  <label> <input type="radio" checked="" name="checkboxValue" ng-model="checkboxValue" value="option2"> <i></i> Manager RH </label><br>
+  </form>
+  <div class="hr-line-dashed"></div>
+  <div ng-show="checkboxValue == 'option1'" ng-init="getAllManagers()">
   <form method="post" class="form-horizontal" role="form">
     <div class="form-group">
       <label class="col-sm-2 ">Nom</label>
@@ -47,7 +53,37 @@
         <input type="text" data-ng-model="user.email" class="form-control">
       </div>
     </div>
+    <div class="form-group" >
+      <label class="col-sm-2">Manager</label>
+      <div class="col-sm-6">
+        <select class="form-control required"  type="text" ng-model="managerRh.id">
+            <option  ng-repeat="m in managers" value="{{m.id}}">{{m.nom}}&nbsp{{m.prenom}}</option>
+          </select>
+          <button ng-click="voir()">voigt</button>
+      </div>
+    </div>
     <div growl></div>
     <button type="submit" class="btn btn-primary btn-sm" ng-click="ajouterCollaborateur()">Ajouter</button>
   </form>
+  </div>
+  <div ng-show="checkboxValue== 'option2'">
+    <form method="post" class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-sm-2 ">Nom</label>
+      <div class="col-sm-6">
+        <input type="text" ng-model="manager.nom" class="form-control">
+        <span class="error" ng-if="errors">{{errors.nom}}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2">prenom</label>
+      <div class="col-sm-6">
+        <input type="text" ng-model="manager.prenom" class="form-control">
+        <span class="error" ng-if="errors">{{errors.prenom}}</span>
+      </div>
+    </div>
+    <div growl></div>
+    <button type="submit" class="btn btn-primary btn-sm" ng-click="ajouterManager()">Ajouter</button>
+    </form>
+  </div>
 </div>

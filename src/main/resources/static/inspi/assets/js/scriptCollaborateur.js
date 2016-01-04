@@ -50,7 +50,6 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	$scope.collaborateurs=[];
 	$scope.collaborateur={};
 	$scope.idCollaborateur=0;;
-	//$scope.motCle=null;
 	$scope.identifiants={};
 	$scope.url = 'http://localhost:1111/collaborateurs/';
 	$scope.pageCourante=0;
@@ -66,7 +65,15 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	$scope.feedbacks=[];
 	$scope.pagequalification = {};
 	$scope.errors = null;
+	$scope.manager ={};
+	$scope.managers = [];
+	$scope.managerRh = {
+			id: null
+	};
 	
+	$scope.voir = function(){
+		console.log($scope.managerRh.id)
+	}
 	$scope.lister=function(){
 		$http.get("http://localhost:1111/collaborateurs?page="+$scope.pageCourante)
 		.success(function(data){
@@ -85,6 +92,7 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 		$http.post("http://localhost:1111/collaborateurs", utilisateur)
 		.success(function(response){
 			if(!response.errors){
+				$http.post("http://localhost:1111/managers/"+$scope.managerRh.id+"/collaborateurs?collaborateur="+response.id);
 				console.log ("collaborateur ajouté");
 				$scope.user.nom="";
 				$scope.user.prenom="";
@@ -144,6 +152,7 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 		var id2= $routeParams.ref;
 		$http.post("http://localhost:1111/collaborateurs/"+id2+"/projets?projet="+$scope.projet.id+"&role="+$scope.projetcollaborateur.role+"&jours="+$scope.projetcollaborateur.joursvalorises)
 		.success(function(data){
+			
 			//$scope.projetsCollavorateur.push([data.projet.intitule,data.projet.dateDebut, data.projet.dateFin, data.rolecollaborateur, data.joursvalorises ]);
 			growl.success('projet attribue avec succes.');
 			console.log(data)
@@ -180,6 +189,8 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	    	$scope.objectifCourant=obj;
 	    	console.log($scope.formulairevaluation);
 		};
+		
+		
 	    
 	  //evaluer un objectif
 		$scope.evaluerprojet=function(){
@@ -207,6 +218,38 @@ app.controller('rhController', function($scope, $http, $routeParams, growl, $loc
 	    	})
 	    	//console.log($scope.feedbackCourant);
 		};
+		
+		$scope.ajouterManager = function () {
+			var manager={"nom":$scope.manager.nom , "prenom": $scope.manager.prenom }
+			$http.post("http://localhost:1111/managers", manager)
+			.success(function(response){
+				if(!response.errors){
+					console.log ("manager ajouté");
+					$scope.manager.nom="";
+					$scope.manager.prenom="";
+					$scope.errors = null;
+					growl.success('Manager ajouté avec succes.',{title: 'Success!'});
+					$timeout(function() { $scope.$apply(function() { $location.path("/allCollabo"); }); }, 3000);
+					console.log(response);
+				}
+				else{
+					$scope.errors = response;
+				}   
+				
+			});
+
+		    };
+		    
+		    $scope.getAllManagers = function(){
+		    	$http.get("http://localhost:1111/managers")
+				.success(function(data){
+					$scope.managers=data;
+					console.log(data);
+				});
+			};
+		 
+			
+	
 		
 		
 		
